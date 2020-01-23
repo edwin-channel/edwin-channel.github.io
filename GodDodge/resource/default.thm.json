@@ -1,0 +1,8 @@
+{
+	"skins": {},
+	"autoGenerateExmlsList": true,
+	"exmls": [
+		"resource/game_skins/SceneStartSkin.exml"
+	],
+	"path": "resource/default.thm.json"
+}

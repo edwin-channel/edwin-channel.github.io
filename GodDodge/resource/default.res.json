@@ -1,0 +1,120 @@
+{
+	"groups": [
+		{
+			"keys": "player_png,space_png,meteor_png,explosion_png,explosion_json,btn_start_png,btn_retry_png,se_move_mp3,se_explosion_mp3,bgm_mp3,bgm2_mp3,btn_retry2_png,btn_start2_png,explosion2_json,explosion2_png,meteor2_png,player2_png,se_explosion2_mp3,se_move2_mp3,space2_png,game_font_fnt,game_font_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/player.png",
+			"type": "image",
+			"name": "player_png"
+		},
+		{
+			"url": "assets/space.png",
+			"type": "image",
+			"name": "space_png"
+		},
+		{
+			"url": "assets/meteor.png",
+			"type": "image",
+			"name": "meteor_png"
+		},
+		{
+			"url": "assets/explosion.png",
+			"type": "image",
+			"name": "explosion_png"
+		},
+		{
+			"url": "assets/explosion.json",
+			"type": "json",
+			"name": "explosion_json"
+		},
+		{
+			"url": "assets/btn_start.png",
+			"type": "image",
+			"name": "btn_start_png"
+		},
+		{
+			"url": "assets/btn_retry.png",
+			"type": "image",
+			"name": "btn_retry_png"
+		},
+		{
+			"name": "se_move_mp3",
+			"type": "sound",
+			"url": "assets/se_move.mp3"
+		},
+		{
+			"name": "se_explosion_mp3",
+			"type": "sound",
+			"url": "assets/se_explosion.mp3"
+		},
+		{
+			"name": "bgm_mp3",
+			"type": "sound",
+			"url": "assets/bgm.mp3"
+		},
+		{
+			"name": "bgm2_mp3",
+			"type": "sound",
+			"url": "assets/bgm.mp3"
+		},
+		{
+			"name": "btn_retry2_png",
+			"type": "image",
+			"url": "assets/btn_retry.png"
+		},
+		{
+			"name": "btn_start2_png",
+			"type": "image",
+			"url": "assets/btn_start.png"
+		},
+		{
+			"name": "explosion2_json",
+			"type": "json",
+			"url": "assets/explosion.json"
+		},
+		{
+			"name": "explosion2_png",
+			"type": "image",
+			"url": "assets/explosion.png"
+		},
+		{
+			"name": "meteor2_png",
+			"type": "image",
+			"url": "assets/meteor.png"
+		},
+		{
+			"name": "player2_png",
+			"type": "image",
+			"url": "assets/player.png"
+		},
+		{
+			"name": "se_explosion2_mp3",
+			"type": "sound",
+			"url": "assets/se_explosion.mp3"
+		},
+		{
+			"name": "se_move2_mp3",
+			"type": "sound",
+			"url": "assets/se_move.mp3"
+		},
+		{
+			"name": "space2_png",
+			"type": "image",
+			"url": "assets/space.png"
+		},
+		{
+			"name": "game_font_fnt",
+			"type": "font",
+			"url": "assets/game_font.fnt"
+		},
+		{
+			"name": "game_font_png",
+			"type": "image",
+			"url": "assets/game_font.png"
+		}
+	]
+}
