@@ -1,6 +1,5 @@
 /** 
- * 所有附加到 GameObject 的組件基類
- * struct
+ * 旋轉位移縮放物件的變換組件，在場景中每一個物件都有變換組件
  */
 UnityEngine.Transform = class {
 
