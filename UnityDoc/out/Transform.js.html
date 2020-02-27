@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: Object.js</title>
+    <title>Source: Transform.js</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -277,7 +277,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="Object.js.html">Source: Object.js</h1>
+        <h1 class="page-title" data-filename="Transform.js.html">Source: Transform.js</h1>
         
 
 
@@ -285,112 +285,198 @@
     <section>
         <article>
             <pre class="prettyprint source "><code>/** 
- * Unity所有物件的基類
+ * 所有附加到 GameObject 的組件基類
+ * struct
  */
-UnityEngine.Object = class {
-    
-	/**
-     * 隱藏旗標
-     * @example
-     * // 不在 Hierarchy 面板顯示
-     * this.gameObject.hideFlags = HideFlags.HideInHierarchy;
-	 * // 不在 Inspector 面板顯示，所有附加在 gameObject 的 Component 都會隱藏(可以針對單一Component隱藏)
-     * this.gameObject.hideFlags = HideFlags.HideInInspector;
-     * // Inspector 裡 Component 的參數皆不能編輯(可以針對單一Component不能編輯)
-     * this.gameObject.hideFlags = HideFlags.NotEditable;
-     */
-	hideFlags;
+UnityEngine.Transform = class {
 
 	/**
-     * 物件名稱
+     * 子物件數量 (get only)
      * @example
-     * // 某個物件設置 name
-     * this.gameObject.name = "enemy";
-     * // 某個程式片段以 name 尋找該物件（消耗性能建議用tag尋找）
-     * var enemy = GameObject.Find("enemy");
+     * // Ball 為 Cube 的子 GameObject
+     * var parentGO = GameObject.Find("Cube");
+     * var childGO = GameObject.Find("Ball");
+     * Debug.Log(parentGO.transform.childCount); // 1
      */
-	name;
+	childCount;
 
     /**
-     * Unity所有物件的基類
+     * 使用三個角度來保存方位 (Inspector 的 rotation 若為根物件就是世界歐拉角)。
+     * x(Pitch), z(Roll) 沿自身坐標系旋轉，y(Yaw) 沿世界坐標系旋轉。
+     * 歐拉角沒有方向大小的概念，借用 Vector3 儲存角度而不是向量，x,y,z 表示個軸向的旋轉角度。
+     * 程式設置角度時 x 限制在 -90 ~ 90 度之間, y,z -180 ~ 180 之間。
+     * 當物體旋轉 +90 或 -90度時，自身坐標系 z 軸與世界坐標系 y 軸會重合, 此時再沿 y 或 z 旋轉時, 將失去一個自由度，即萬向節死鎖。
+     * 萬向節死鎖狀態下沿 y 或 z 旋轉時，歸 z 軸旋轉。因為萬向節死鎖可改用四元數 this.transform.rotation。
+     * @example
+     * // 歐拉角的 x 增加 1 度
+     * this.transform.eulerAngles += new Vector3(1, 0, 0);
+     */
+	eulerAngles;
+
+    /**
+     * 物件 Z 軸往前方的單位向量
+     * @example
+     * // 沿 Z 軸前方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)
+     * Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.forward * 5, Color.red);
+     */
+	forward;
+
+    /**
+     * 自從最後一次的 hasChanged 設成 false 後 transform 是否有設定過
+     * @example
+     * if (cube.transform.hasChanged) {
+     *     Debug.Log("cube.transform.hasChanged");
+     *     cube.transform.hasChanged = false;
+     * }
+     */
+	hasChanged;
+
+    /**
+     * 變換組件 hierarchy 結構可以存儲的容量, 會根據子物件增加而自動配置容量空間, 或可手動設置容量大小
+     * @example
+     * Debug.Log(cube.transform.hierarchyCapacity);
+     */
+    hierarchyCapacity;
+
+    /**
+     * 變換組件 hierarchy 結構中有變換組件的數量 
+     * @example
+     * Debug.Log(cube.transform.hierarchyCount);
+     */
+    hierarchyCount;
+
+    /**
+     * 相對於父物件的旋轉角度，使用三個角度來保存方位 (Inspector 的 rotation 若為子物件就是本地歐拉角)。
+     * @example
+     * // 歐拉角的 x 增加 1 度
+     * this.transform.localEulerAngles += new Vector3(1, 0, 0);
+     */
+	localEulerAngles;
+
+    /**
+     * 相對於父物件的位移。
+     * @example
+     * // 父物件軸 x 增加 1
+     * this.transform.localPosition += new Vector3(1, 0, 0);
+     */
+	localPosition;
+
+    /**
+     * 相對於父物件的旋轉。
+     * @example
+     * // 用四元數讓 x 增加 1 度
+     * this.transform.localRotation *= Quaternion.Euler(1, 0, 0);
+     */
+	localRotation;
+
+    /**
+     * 相對於父物件的縮放。
+     * @example
+     * // 子物件放大兩倍
+     * this.transform.localScale *= 2;
+     */
+	localScale;
+
+    /**
+     * 轉換一個點從本地座標到世界座標，可使用 Transform.TransformPoint
+     */
+    localToWorldMatrix;
+
+    /**
+     * 物件的整體縮放 (get only)
+     * @example
+     * // 父子物件放大兩倍
+     * parentGO.transform.localScale *= 2;
+     * childGO.transform.localScale *= 2;
+     * Debug.Log(childGO.transform.lossyScale); // (4.0, 4.0, 4.0) 整體放大4倍
+     */
+	lossyScale;
+
+    /**
+     * 設置父物件
+     * @example
+     * var parentGO = GameObject.Find("CubeSprite");
+     * var childGO = GameObject.Find("CubeSpriteSub");
+     * childGO.transform.parent = parentGO.transform;
+     */
+	parent;
+
+    /**
+     * 世界座標位置。
+     * @example
+     * // 軸 x 增加 1
+     * this.transform.position += new Vector3(1, 0, 0);
+     */
+	position;
+
+    /**
+     * 物件 X 軸往右方的單位向量
+     * @example
+     * // 沿 X 軸右方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)
+     * Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.right * 5, Color.red);
+     */
+	right;
+
+    /**
+     * 取得最父層級變換組件 (get only)
+     * @example
+     * // parentGO 與 childGO 都在 Hierarchy 面板根節點
+     * var parentGO = GameObject.Find("CubeSprite");
+     * var childGO = GameObject.Find("CubeSpriteSub");
+     * hildGO.transform.parent = parentGO.transform;
+     * Debug.Log(childGO.transform.root == parentGO.transform); // True
+     */
+	root;
+
+    /**
+     * 世界座標旋轉角度。
+     * 無歐拉角角度限制與萬向節死鎖問題。
+     * Quaternion 在 3D 圖形學中代表旋轉，由一個三維向量(x,y,z)和一個標量(w)組成。
+     * 旋轉軸為 V, 旋轉弧度為 θ, 如果使用四元數表示, 則四個分量為:
+     * x = sin(θ/2) * V.x。
+     * y = sin(θ/2) * V.y。
+     * z = sin(θ/2) * V.z。
+     * w = cos(θ/2)。
+     * @example
+     * // 物體沿 y 軸旋轉 50 度
+     * var cube = GameObject.Find("CubeB");
+     * Quaternion qt = new Quaternion();
+     * Vector3 v = Vector3.up;
+     * float rad = 50 * Mathf.Deg2Rad;
+     * qt.x = Mathf.Sin(rad / 2) * v.x;
+     * qt.y = Mathf.Sin(rad / 2) * v.y;
+     * qt.z = Mathf.Sin(rad / 2) * v.z;
+     * qt.w = Mathf.Cos(rad / 2);
+     * cube.transform.rotation = qt;
+     * // 簡易寫法 (歐拉角轉四元數)
+     * cube.transform.rotation = Quaternion.Euler(0, 50, 0);
+     * // 用四元數讓 x 增加 1 度 (乘法表是組合旋轉，即旋轉角度疊加)
+     * cube.transform.rotation *= Quaternion.Euler(1, 0, 0);
+     * // Rotate 方法也是用四元數旋轉無死鎖現象
+     * cube.transform.Rotate(1,0,0);
+     */
+	rotation;
+
+    /**
+     * 物件 Y 軸往上方的單位向量
+     * @example
+     * // 沿 Y 軸上方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)
+     * Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.up * 5, Color.red);
+     */
+	up;
+
+    /**
+     * 轉換一個點從世界座標到本地座標，可使用 Transform.InverseTransformPoint
+     */
+    worldToLocalMatrix;
+
+    /**
+     * Transform 建構子
      */
     constructor() {}
 
-    /**
-     * 回傳物件唯一識別ID
-     * @return {float} id
-     */
-    GetInstanceID() {}
+    
 
-    /**
-     * 轉字串
-     * @return {string} 回傳物件名稱
-     */
-    ToString() {}
-
-    /**
-     * 移除 GameObject, Component 或是 Asset
-     * @param {Object} obj - 要被移除的物件
-     * @param {float} [t=0.0f] - 移除的延遲時間（單位為秒）
-     * @example
-     * // 5秒後移除 Rigidbody 組件
-     * Object.Destroy(GetComponent&amp;lt;Rigidbody&amp;gt;(),5);
-     */
-    static Destroy(obj, t) {}
-
-    /**
-     * 立即移除物件，強烈建議使用 Destroy, DestroyImmediate 是立即銷毀，立即釋放資源，做這個操作的時候，會消耗很多時間的，影響主線程運行。Destroy 是異步銷毀，一般在下一幀就銷毀了，不會影響主線程的運行。所以我們在運行時使用 Destroy 後，不能在當前幀中 Find 或 GetChild 已經刪除的物體，這樣還是會找到的。要達到 DestroyImmediate 的效果需要 Destroy 完後，添加 transform.DetachChildren();，或者刪除完後將刪除 transform 的 parent 設置為 null;
-     * @param {Object} obj - 要被移除的物件
-     * @param {bool} [allowDestroyingAssets=false] - Assets 資源一併刪除
-     * @example
-     * // 刪除 texture，texture(xxx.png) 在 Inspector 面板已經不能觀察其相關屬性
-     * var s = GameObject.Find("Ball");
-     * var mr = s.GetComponent&amp;lt;MeshRenderer&amp;gt;();
-     * Object.DestroyImmediate(mr.material.mainTexture, true);
-     */
-    static DestroyImmediate(obj, allowDestroyingAssets) {}
-
-    /**
-     * 場景更換後不刪除物件。如果該物件為 GameObject，會保留其 Transform 子 GameObject。
-     * @param {Object} target - 場景更換後不刪除的物件
-     * @example
-     * var s = GameObject.Find("Ball");
-     * Object.DontDestroyOnLoad(s);
-     * SceneManager.LoadScene("Scene2"); // SceneManager 需要 using UnityEngine.SceneManagement
-     */
-    static DontDestroyOnLoad(target) {}
-
-    /**
-     * 尋找第一個指定型態物件
-     * @param {Type} type - 指定要尋找的物件類型
-     * @return {Object} 回傳配對型態的物件，如果沒有回傳 null
-     * @example
-     * var script = Object.FindObjectOfType(typeof(MonoBehaviour)); // 找到第一個執行中腳本
-     * Debug.Log(script);
-     */
-    static FindObjectOfType(type) {}
-
-    /**
-     * 尋找指定型態物件陣列
-     * @param {Type} type - 指定要尋找的物件類型
-     * @return {Object[]} 回傳配對型態的物件陣列
-     * @example
-     * var scripts = Object.FindObjectsOfType(typeof(MonoBehaviour)); // 找所有執行中腳本
-     * foreach(var script in scripts) Debug.Log(script);
-     */
-    static FindObjectsOfType(type) {}
-
-    /**
-     * 拷貝物件
-     * @param {Object} original - 你想要拷貝的物件
-     * @param {Transform}[parent] - 配置物件的父變換組件
-     * @param {bool}[instantiateInWorldSpace] - 如果為 true 則配置拷貝物件大小旋轉縮放為初始值如座標為 0,0,0。如果為 false 則配置拷貝物件大小旋轉縮放值為父變換組件的拷貝
-     * @return {Object} 回傳拷貝的物件
-     * @example
-     * var cube = GameObject.Find("Cube");
-     * Object.Instantiate(cube, cube.transform, true);
-     */
-    static Instantiate(original, parent, instantiateInWorldSpace) {}
 }</code></pre>
         </article>
     </section>

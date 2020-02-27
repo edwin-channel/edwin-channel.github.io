@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Class: Component</title>
+    <title>Class: GameObject</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -277,7 +277,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="UnityEngine.Component.html">Class: Component</h1>
+        <h1 class="page-title" data-filename="UnityEngine.GameObject.html">Class: GameObject</h1>
         
 
 
@@ -286,10 +286,10 @@
     
 <header>
     <h2>
-    Component
+    GameObject
     </h2>
     
-        <div class="class-description">所有附加到 GameObject 的組件基類</div>
+        <div class="class-description">Unity 場景上所有有形實體的基類</div>
     
 </header>  
 
@@ -301,14 +301,14 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="Component">
+        <h4 class="name" id="GameObject">
             
-            new UnityEngine.Component<span class="signature">()</span>
+            new UnityEngine.GameObject<span class="signature">(<span class="optional">name</span>, <span class="optional">components</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line34">line 34</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line77">line 77</a>
         </div>
         
     </div>
@@ -319,7 +319,7 @@
     
     
     <div class="description">
-        附加到 GameObject 的組件基類
+        GameObject 建構子
     </div>
     
 
@@ -327,6 +327,88 @@
     
     
     
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                物件名</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>components</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Type></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                components 列表</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -366,6 +448,14 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>var player = new GameObject("test", typeof(Rigidbody), typeof(BoxCollider));</code></pre>
+    
+
+    
 </dd>
 
     
@@ -394,7 +484,7 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="gameObject">gameObject</h4>
+        <h4 class="name" id="activeInHierarchy">activeInHierarchy</h4>
     </div>
     
     
@@ -402,7 +492,7 @@
 <dd>
     
     <div class="description">
-        附加組件的 GameObject
+        是否在階層啟用 (get only)
     </div>
     
     
@@ -437,8 +527,68 @@
         
 
     
-    <pre class="prettyprint"><code>// 不在 Hierarchy 面板顯示
-this.gameObject.hideFlags = HideFlags.HideInHierarchy;</code></pre>
+    <pre class="prettyprint"><code>// Ball 為 Cube 的子 GameObject
+var parentGO = GameObject.Find("Cube");
+var childGO = GameObject.Find("Ball");
+parentGO.SetActive(false); // 設定父物件不啟用
+Debug.Log(parentGO.activeSelf); // False, 父物件不啟用
+Debug.Log(childGO.activeSelf); // True, 子物件為啟用
+Debug.Log(childGO.activeInHierarchy); // False, 子物件雖啟用但因父物件不啟用而連帶不顯示</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="activeSelf">activeSelf</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        自身是否啟用 (get only)
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>var GO = GameObject.Find("Cube");
+GO.SetActive(false); // 設定物件不啟用
+Debug.Log(GO.activeSelf); // False, 物件不啟用</code></pre>
     
 
     
@@ -506,6 +656,115 @@ this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="isStatic">isStatic</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        是否為靜態物件, 靜態物件與是否場景烘培有關 (Editor only API)
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>var GO = GameObject.Find("Cube");
+Debug.Log(GO.isStatic);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="layer">layer</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        取得 layer 索引
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>var GO = GameObject.Find("Cube");
+// 取得 layer name
+Debug.Log(LayerMask.LayerToName(GO.layer)); // Default</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="name">name</h4>
     </div>
     
@@ -562,7 +821,7 @@ var enemy = GameObject.Find("enemy");</code></pre>
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="tag">tag</h4>
+        <h4 class="name" id="scene">scene</h4>
     </div>
     
     
@@ -570,7 +829,7 @@ var enemy = GameObject.Find("enemy");</code></pre>
 <dd>
     
     <div class="description">
-        附加組件的 GameObject 的分類標籤
+        取得物件所在 scene
     </div>
     
     
@@ -605,9 +864,62 @@ var enemy = GameObject.Find("enemy");</code></pre>
         
 
     
-    <pre class="prettyprint"><code>Debug.Log(this.tag);
-// 標籤需要在 Tags and Layers manager 宣告，某個程式片段以 tag 尋找該物件
-var players = GameObject.FindGameObjectsWithTag("Player");</code></pre>
+    <pre class="prettyprint"><code>var GO = GameObject.Find("Cube");
+Debug.Log(GO.scene.name);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="tag">tag</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        取得物件標籤
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>var GO = GameObject.Find("Cube");
+Debug.Log(GO.tag);</code></pre>
     
 
     
@@ -625,7 +937,7 @@ var players = GameObject.FindGameObjectsWithTag("Player");</code></pre>
 <dd>
     
     <div class="description">
-        附加組件的 GameObject 的變換組件
+        取得變換組件
     </div>
     
     
@@ -660,7 +972,8 @@ var players = GameObject.FindGameObjectsWithTag("Player");</code></pre>
         
 
     
-    <pre class="prettyprint"><code>Debug.Log(this.transform);</code></pre>
+    <pre class="prettyprint"><code>var GO = GameObject.Find("Cube");
+Debug.Log(GO.transform);</code></pre>
     
 
     
@@ -676,6 +989,692 @@ var players = GameObject.FindGameObjectsWithTag("Player");</code></pre>
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id=".CreatePrimitive">
+            
+            <span class="type-signature static">static</span>UnityEngine.GameObject.CreatePrimitive<span class="signature">(type)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line232">line 232</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        建立基本物件
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">PrimitiveType</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                基本物件類型</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 建立方塊
+GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+cube.transform.position = new Vector3(0, 0.5f, 0);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Find">
+            
+            <span class="type-signature static">static</span>UnityEngine.GameObject.Find<span class="signature">(name)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line242">line 242</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        用 name 找尋物件
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                物件名稱</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>hand = GameObject.Find("Hand");
+// 父子階層找尋方法用 /
+hand = GameObject.Find("Monster/Arm/Hand");</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".FindGameObjectsWithTag">
+            
+            <span class="type-signature static">static</span>UnityEngine.GameObject.FindGameObjectsWithTag<span class="signature">(tag)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Array.&lt;GameObject>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line252">line 252</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        用 tag 找尋物件陣列
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>tag</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                標籤名</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Array.&lt;GameObject>
+                        
+                    
+            </td>
+            <td class="description last">回傳物件陣列</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>var respawns = GameObject.FindGameObjectsWithTag("Respawn");
+foreach (var respawn in respawns) Debug.Log(respawn);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".FindWithTag">
+            
+            <span class="type-signature static">static</span>UnityEngine.GameObject.FindWithTag<span class="signature">(tag)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{GameObject}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line262">line 262</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        用 tag 找尋物件，返回第一個找到的物件
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>tag</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                標籤名</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        GameObject
+                        
+                    
+            </td>
+            <td class="description last">回傳物件</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>var player = GameObject.FindWithTag("Player");
+Debug.Log(player);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="AddComponent">
+            
+            AddComponent<span class="signature">(className)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line87">line 87</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        新增 component 組件至 gameObject
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>className</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Type</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                要新增組件的類名</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>var player = new GameObject("test");
+player.AddComponent(typeof(Rigidbody));
+player.AddComponent&lt;SphereCollider&gt;();</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="BroadcastMessage">
             
             BroadcastMessage<span class="signature">(methodName, <span class="optional">parameter</span>, <span class="optional">options</span>)</span>
@@ -683,7 +1682,7 @@ var players = GameObject.FindGameObjectsWithTag("Player");</code></pre>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line47">line 47</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line109">line 109</a>
         </div>
         
     </div>
@@ -893,7 +1892,7 @@ BroadcastMessage("Test"); // 父子 Test 函式都會呼叫</code></pre>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line89">line 89</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line151">line 151</a>
         </div>
         
     </div>
@@ -1053,7 +2052,7 @@ void OnTriggerEnter(Collider other)
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line99">line 99</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line161">line 161</a>
         </div>
         
     </div>
@@ -1207,7 +2206,7 @@ Debug.Log(script);</code></pre>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line109">line 109</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line171">line 171</a>
         </div>
         
     </div>
@@ -1361,7 +2360,7 @@ Debug.Log(script);</code></pre>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line119">line 119</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line181">line 181</a>
         </div>
         
     </div>
@@ -1515,7 +2514,7 @@ Debug.Log(script);</code></pre>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line129">line 129</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line191">line 191</a>
         </div>
         
     </div>
@@ -1669,7 +2668,7 @@ foreach(var script in scripts) Debug.Log(script);</code></pre>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line139">line 139</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line201">line 201</a>
         </div>
         
     </div>
@@ -1823,7 +2822,7 @@ foreach(var script in scripts) Debug.Log(script);</code></pre>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line149">line 149</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line211">line 211</a>
         </div>
         
     </div>
@@ -2079,7 +3078,7 @@ foreach(var script in scripts) Debug.Log(script);</code></pre>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line60">line 60</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line122">line 122</a>
         </div>
         
     </div>
@@ -2289,7 +3288,7 @@ SendMessage("Test"); // 父 Test 函式會呼叫，子 Test 函式不會呼叫</
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line73">line 73</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line135">line 135</a>
         </div>
         
     </div>
@@ -2491,6 +3490,131 @@ SendMessageUpwards("Test"); // 父子 Test 函式都會呼叫</code></pre>
         
             
 <dt>
+    <div class="nameContainer">
+        <h4 class="name" id="SetActive">
+            
+            SetActive<span class="signature">(value)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line96">line 96</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        啟用物件與否
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">bool</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                啟用物件與否</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>var player = new GameObject("test");
+player.SetActive(false);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
     <div class="nameContainer inherited">
         <h4 class="name" id="ToString">
             
@@ -2601,7 +3725,7 @@ SendMessageUpwards("Test"); // 父子 Test 函式都會呼叫</code></pre>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line160">line 160</a>
+            <a href="GameObject.js.html">GameObject.js</a>, <a href="GameObject.js.html#line222">line 222</a>
         </div>
         
     </div>

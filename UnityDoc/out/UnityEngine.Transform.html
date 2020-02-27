@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Class: Object</title>
+    <title>Class: Transform</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -277,7 +277,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="UnityEngine.Object.html">Class: Object</h1>
+        <h1 class="page-title" data-filename="UnityEngine.Transform.html">Class: Transform</h1>
         
 
 
@@ -286,10 +286,11 @@
     
 <header>
     <h2>
-    Object
+    Transform
     </h2>
     
-        <div class="class-description">Unity所有物件的基類</div>
+        <div class="class-description">所有附加到 GameObject 的組件基類
+struct</div>
     
 </header>  
 
@@ -301,14 +302,14 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="Object">
+        <h4 class="name" id="Transform">
             
-            new UnityEngine.Object<span class="signature">()</span>
+            new UnityEngine.Transform<span class="signature">()</span>
         </h4>
     
         
         <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line31">line 31</a>
+            <a href="Transform.js.html">Transform.js</a>, <a href="Transform.js.html#line190">line 190</a>
         </div>
         
     </div>
@@ -319,7 +320,7 @@
     
     
     <div class="description">
-        Unity所有物件的基類
+        Transform 建構子
     </div>
     
 
@@ -388,7 +389,7 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="hideFlags">hideFlags</h4>
+        <h4 class="name" id="childCount">childCount</h4>
     </div>
     
     
@@ -396,7 +397,7 @@
 <dd>
     
     <div class="description">
-        隱藏旗標
+        子物件數量 (get only)
     </div>
     
     
@@ -431,12 +432,10 @@
         
 
     
-    <pre class="prettyprint"><code>// 不在 Hierarchy 面板顯示
-this.gameObject.hideFlags = HideFlags.HideInHierarchy;
-// 不在 Inspector 面板顯示，所有附加在 gameObject 的 Component 都會隱藏(可以針對單一Component隱藏)
-this.gameObject.hideFlags = HideFlags.HideInInspector;
-// Inspector 裡 Component 的參數皆不能編輯(可以針對單一Component不能編輯)
-this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
+    <pre class="prettyprint"><code>// Ball 為 Cube 的子 GameObject
+var parentGO = GameObject.Find("Cube");
+var childGO = GameObject.Find("Ball");
+Debug.Log(parentGO.transform.childCount); // 1</code></pre>
     
 
     
@@ -446,7 +445,7 @@ this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="name">name</h4>
+        <h4 class="name" id="eulerAngles">eulerAngles</h4>
     </div>
     
     
@@ -454,7 +453,12 @@ this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
 <dd>
     
     <div class="description">
-        物件名稱
+        使用三個角度來保存方位 (Inspector 的 rotation 若為根物件就是世界歐拉角)。
+x(Pitch), z(Roll) 沿自身坐標系旋轉，y(Yaw) 沿世界坐標系旋轉。
+歐拉角沒有方向大小的概念，借用 Vector3 儲存角度而不是向量，x,y,z 表示個軸向的旋轉角度。
+程式設置角度時 x 限制在 -90 ~ 90 度之間, y,z -180 ~ 180 之間。
+當物體旋轉 +90 或 -90度時，自身坐標系 z 軸與世界坐標系 y 軸會重合, 此時再沿 y 或 z 旋轉時, 將失去一個自由度，即萬向節死鎖。
+萬向節死鎖狀態下沿 y 或 z 旋轉時，歸 z 軸旋轉。因為萬向節死鎖可改用四元數 this.transform.rotation。
     </div>
     
     
@@ -489,1221 +493,943 @@ this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 某個物件設置 name
-this.gameObject.name = "enemy";
-// 某個程式片段以 name 尋找該物件（消耗性能建議用tag尋找）
-var enemy = GameObject.Find("enemy");</code></pre>
+    <pre class="prettyprint"><code>// 歐拉角的 x 增加 1 度
+this.transform.eulerAngles += new Vector3(1, 0, 0);</code></pre>
     
 
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="forward">forward</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        物件 Z 軸往前方的單位向量
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 沿 Z 軸前方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)
+Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.forward * 5, Color.red);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="hasChanged">hasChanged</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        自從最後一次的 hasChanged 設成 false 後 transform 是否有設定過
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>if (cube.transform.hasChanged) {
+    Debug.Log("cube.transform.hasChanged");
+    cube.transform.hasChanged = false;
+}</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="hierarchyCapacity">hierarchyCapacity</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        變換組件 hierarchy 結構可以存儲的容量, 會根據子物件增加而自動配置容量空間, 或可手動設置容量大小
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(cube.transform.hierarchyCapacity);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="hierarchyCount">hierarchyCount</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        變換組件 hierarchy 結構中有變換組件的數量
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(cube.transform.hierarchyCount);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="localEulerAngles">localEulerAngles</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        相對於父物件的旋轉角度，使用三個角度來保存方位 (Inspector 的 rotation 若為子物件就是本地歐拉角)。
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 歐拉角的 x 增加 1 度
+this.transform.localEulerAngles += new Vector3(1, 0, 0);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="localPosition">localPosition</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        相對於父物件的位移。
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 父物件軸 x 增加 1
+this.transform.localPosition += new Vector3(1, 0, 0);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="localRotation">localRotation</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        相對於父物件的旋轉。
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 用四元數讓 x 增加 1 度
+this.transform.localRotation *= Quaternion.Euler(1, 0, 0);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="localScale">localScale</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        相對於父物件的縮放。
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 子物件放大兩倍
+this.transform.localScale *= 2;</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="localToWorldMatrix">localToWorldMatrix</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        轉換一個點從本地座標到世界座標，可使用 Transform.TransformPoint
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="lossyScale">lossyScale</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        物件的整體縮放 (get only)
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 父子物件放大兩倍
+parentGO.transform.localScale *= 2;
+childGO.transform.localScale *= 2;
+Debug.Log(childGO.transform.lossyScale); // (4.0, 4.0, 4.0) 整體放大4倍</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="parent">parent</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        設置父物件
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>var parentGO = GameObject.Find("CubeSprite");
+var childGO = GameObject.Find("CubeSpriteSub");
+childGO.transform.parent = parentGO.transform;</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="position">position</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        世界座標位置。
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 軸 x 增加 1
+this.transform.position += new Vector3(1, 0, 0);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="right">right</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        物件 X 軸往右方的單位向量
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 沿 X 軸右方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)
+Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.right * 5, Color.red);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="root">root</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        取得最父層級變換組件 (get only)
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// parentGO 與 childGO 都在 Hierarchy 面板根節點
+var parentGO = GameObject.Find("CubeSprite");
+var childGO = GameObject.Find("CubeSpriteSub");
+hildGO.transform.parent = parentGO.transform;
+Debug.Log(childGO.transform.root == parentGO.transform); // True</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="rotation">rotation</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        世界座標旋轉角度。
+無歐拉角角度限制與萬向節死鎖問題。
+Quaternion 在 3D 圖形學中代表旋轉，由一個三維向量(x,y,z)和一個標量(w)組成。
+旋轉軸為 V, 旋轉弧度為 θ, 如果使用四元數表示, 則四個分量為:
+x = sin(θ/2) * V.x。
+y = sin(θ/2) * V.y。
+z = sin(θ/2) * V.z。
+w = cos(θ/2)。
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 物體沿 y 軸旋轉 50 度
+var cube = GameObject.Find("CubeB");
+Quaternion qt = new Quaternion();
+Vector3 v = Vector3.up;
+float rad = 50 * Mathf.Deg2Rad;
+qt.x = Mathf.Sin(rad / 2) * v.x;
+qt.y = Mathf.Sin(rad / 2) * v.y;
+qt.z = Mathf.Sin(rad / 2) * v.z;
+qt.w = Mathf.Cos(rad / 2);
+cube.transform.rotation = qt;
+// 簡易寫法 (歐拉角轉四元數)
+cube.transform.rotation = Quaternion.Euler(0, 50, 0);
+// 用四元數讓 x 增加 1 度 (乘法表是組合旋轉，即旋轉角度疊加)
+cube.transform.rotation *= Quaternion.Euler(1, 0, 0);
+// Rotate 方法也是用四元數旋轉無死鎖現象
+cube.transform.Rotate(1,0,0);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="up">up</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        物件 Y 軸往上方的單位向量
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 沿 Y 軸上方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)
+Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.up * 5, Color.red);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="worldToLocalMatrix">worldToLocalMatrix</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        轉換一個點從世界座標到本地座標，可使用 Transform.InverseTransformPoint
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
     
 </dd>
 
         </dl>
     
     
-    
-        <h3 class="subsection-title">Methods</h3>
-        
-        <dl>
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".Destroy">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.Destroy<span class="signature">(obj, <span class="optional">t</span>)</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line53">line 53</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        移除 GameObject, Component 或是 Asset
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		<th>Default</th>
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>obj</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                要被移除的物件</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>t</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">float</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                    0.0f
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                移除的延遲時間（單位為秒）</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>// 5秒後移除 Rigidbody 組件
-Object.Destroy(GetComponent&lt;Rigidbody&gt;(),5);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".DestroyImmediate">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.DestroyImmediate<span class="signature">(obj, <span class="optional">allowDestroyingAssets</span>)</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line65">line 65</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        立即移除物件，強烈建議使用 Destroy, DestroyImmediate 是立即銷毀，立即釋放資源，做這個操作的時候，會消耗很多時間的，影響主線程運行。Destroy 是異步銷毀，一般在下一幀就銷毀了，不會影響主線程的運行。所以我們在運行時使用 Destroy 後，不能在當前幀中 Find 或 GetChild 已經刪除的物體，這樣還是會找到的。要達到 DestroyImmediate 的效果需要 Destroy 完後，添加 transform.DetachChildren();，或者刪除完後將刪除 transform 的 parent 設置為 null;
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		<th>Default</th>
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>obj</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                要被移除的物件</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>allowDestroyingAssets</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">bool</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                Assets 資源一併刪除</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>// 刪除 texture，texture(xxx.png) 在 Inspector 面板已經不能觀察其相關屬性
-var s = GameObject.Find("Ball");
-var mr = s.GetComponent&lt;MeshRenderer&gt;();
-Object.DestroyImmediate(mr.material.mainTexture, true);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".DontDestroyOnLoad">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.DontDestroyOnLoad<span class="signature">(target)</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line75">line 75</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        場景更換後不刪除物件。如果該物件為 GameObject，會保留其 Transform 子 GameObject。
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>target</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                場景更換後不刪除的物件</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>var s = GameObject.Find("Ball");
-Object.DontDestroyOnLoad(s);
-SceneManager.LoadScene("Scene2"); // SceneManager 需要 using UnityEngine.SceneManagement</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".FindObjectOfType">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.FindObjectOfType<span class="signature">(type)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Object}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line85">line 85</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        尋找第一個指定型態物件
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Type</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                指定要尋找的物件類型</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        Object
-                        
-                    
-            </td>
-            <td class="description last">回傳配對型態的物件，如果沒有回傳 null</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>var script = Object.FindObjectOfType(typeof(MonoBehaviour)); // 找到第一個執行中腳本
-Debug.Log(script);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".FindObjectsOfType">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.FindObjectsOfType<span class="signature">(type)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Array.&lt;Object>}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line95">line 95</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        尋找指定型態物件陣列
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Type</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                指定要尋找的物件類型</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        Array.&lt;Object>
-                        
-                    
-            </td>
-            <td class="description last">回傳配對型態的物件陣列</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>var scripts = Object.FindObjectsOfType(typeof(MonoBehaviour)); // 找所有執行中腳本
-foreach(var script in scripts) Debug.Log(script);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".Instantiate">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.Instantiate<span class="signature">(original, <span class="optional">parent</span>, <span class="optional">instantiateInWorldSpace</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Object}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line107">line 107</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        拷貝物件
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>original</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                你想要拷貝的物件</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>parent</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Transform</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                配置物件的父變換組件</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>instantiateInWorldSpace</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">bool</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                如果為 true 則配置拷貝物件大小旋轉縮放為初始值如座標為 0,0,0。如果為 false 則配置拷貝物件大小旋轉縮放值為父變換組件的拷貝</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        Object
-                        
-                    
-            </td>
-            <td class="description last">回傳拷貝的物件</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>var cube = GameObject.Find("Cube");
-Object.Instantiate(cube, cube.transform, true);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="GetInstanceID">
-            
-            GetInstanceID<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line37">line 37</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        回傳物件唯一識別ID
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        float
-                        
-                    
-            </td>
-            <td class="description last">id</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="ToString">
-            
-            ToString<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{string}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line43">line 43</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        轉字串
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        string
-                        
-                    
-            </td>
-            <td class="description last">回傳物件名稱</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        </dl>
     
     
     
