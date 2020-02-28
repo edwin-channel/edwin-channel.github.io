@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Class: Object</title>
+    <title>Class: Mathf</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -424,7 +424,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="UnityEngine.Object.html">Class: Object</h1>
+        <h1 class="page-title" data-filename="UnityEngine.Mathf.html">Class: Mathf</h1>
         
 
 
@@ -433,10 +433,10 @@
     
 <header>
     <h2>
-    Object
+    Mathf
     </h2>
     
-        <div class="class-description">Unity所有物件的基類</div>
+        <div class="class-description">數學運算</div>
     
 </header>  
 
@@ -448,14 +448,14 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="Object">
+        <h4 class="name" id="Mathf">
             
-            new UnityEngine.Object<span class="signature">()</span>
+            new UnityEngine.Mathf<span class="signature">()</span>
         </h4>
     
         
         <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line31">line 31</a>
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line74">line 74</a>
         </div>
         
     </div>
@@ -466,7 +466,7 @@
     
     
     <div class="description">
-        Unity所有物件的基類
+        Mathf 為 struct
     </div>
     
 
@@ -535,7 +535,7 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="hideFlags">hideFlags</h4>
+        <h4 class="name" id="Deg2Rad">Deg2Rad</h4>
     </div>
     
     
@@ -543,7 +543,7 @@
 <dd>
     
     <div class="description">
-        隱藏旗標
+        角度轉弳度
     </div>
     
     
@@ -578,12 +578,7 @@
         
 
     
-    <pre class="prettyprint"><code>// 不在 Hierarchy 面板顯示
-this.gameObject.hideFlags = HideFlags.HideInHierarchy;
-// 不在 Inspector 面板顯示，所有附加在 gameObject 的 Component 都會隱藏(可以針對單一Component隱藏)
-this.gameObject.hideFlags = HideFlags.HideInInspector;
-// Inspector 裡 Component 的參數皆不能編輯(可以針對單一Component不能編輯)
-this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
+    <pre class="prettyprint"><code>60 * Mathf.Deg2Rad;</code></pre>
     
 
     
@@ -593,7 +588,7 @@ this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="name">name</h4>
+        <h4 class="name" id="Epsilon">Epsilon</h4>
     </div>
     
     
@@ -601,7 +596,7 @@ this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
 <dd>
     
     <div class="description">
-        物件名稱
+        厄普西隆，極小的浮點數
     </div>
     
     
@@ -636,10 +631,242 @@ this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 某個物件設置 name
-this.gameObject.name = "enemy";
-// 某個程式片段以 name 尋找該物件（消耗性能建議用tag尋找）
-var enemy = GameObject.Find("enemy");</code></pre>
+    <pre class="prettyprint"><code>Debug.Log(Mathf.Epsilon); // 1.401298E-45
+// 浮點數比較（解決誤差問題）
+bool isEqual(float a, float b)
+{
+    if (a >= b - Mathf.Epsilon && a <= b + Mathf.Epsilon)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="Infinity">Infinity</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        無窮
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.Infinity); // Infinity
+// 射線探測
+void Update()
+{
+    // 畫出射線
+    Debug.DrawLine(Vector3.zero, Vector3.forward * 100);
+    // 讓射線無窮遠
+    if (Physics.Raycast(Vector3.zero, Vector3.forward, Mathf.Infinity))
+    {
+        print("物件前方有東西!");
+    }
+}</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="NegativeInfinity">NegativeInfinity</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        負無窮
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.NegativeInfinity); // -Infinity</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="PI">PI</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        圓周率
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.PI); // 3.14159....</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="Rad2Deg">Rad2Deg</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        弳度轉角度
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>1 * Mathf.Rad2Deg;</code></pre>
     
 
     
@@ -655,14 +882,14 @@ var enemy = GameObject.Find("enemy");</code></pre>
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id=".Destroy">
+        <h4 class="name" id=".Abs">
             
-            <span class="type-signature static">static</span>UnityEngine.Object.Destroy<span class="signature">(obj, <span class="optional">t</span>)</span>
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Abs<span class="signature">(value)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
         </h4>
     
         
         <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line53">line 53</a>
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line83">line 83</a>
         </div>
         
     </div>
@@ -673,7 +900,7 @@ var enemy = GameObject.Find("enemy");</code></pre>
     
     
     <div class="description">
-        移除 GameObject, Component 或是 Asset
+        取絕對值
     </div>
     
 
@@ -694,8 +921,6 @@ var enemy = GameObject.Find("enemy");</code></pre>
 		<th>Type</th>
 		
 		
-		<th>Default</th>
-		
 		
 		<th class="last">Description</th>
 	</tr>
@@ -706,39 +931,7 @@ var enemy = GameObject.Find("enemy");</code></pre>
 	
         <tr>
             
-                <td class="name"><code>obj</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                要被移除的物件</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>t</code></td>
+                <td class="name"><code>value</code></td>
             
             
             <td class="type">
@@ -751,935 +944,15 @@ var enemy = GameObject.Find("enemy");</code></pre>
             </td>
             
             
-                <td class="default">
-                
-                    0.0f
-                
-                </td>
-            
             
             <td class="description last">
                 
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                移除的延遲時間（單位為秒）</td>
+                任意數字</td>
         </tr>
 	
 	
 	</tbody>
 </table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>// 5秒後移除 Rigidbody 組件
-Object.Destroy(GetComponent&lt;Rigidbody&gt;(),5);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".DestroyImmediate">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.DestroyImmediate<span class="signature">(obj, <span class="optional">allowDestroyingAssets</span>)</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line65">line 65</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        立即移除物件，強烈建議使用 Destroy, DestroyImmediate 是立即銷毀，立即釋放資源，做這個操作的時候，會消耗很多時間的，影響主線程運行。Destroy 是異步銷毀，一般在下一幀就銷毀了，不會影響主線程的運行。所以我們在運行時使用 Destroy 後，不能在當前幀中 Find 或 GetChild 已經刪除的物體，這樣還是會找到的。要達到 DestroyImmediate 的效果需要 Destroy 完後，添加 transform.DetachChildren();，或者刪除完後將刪除 transform 的 parent 設置為 null;
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		<th>Default</th>
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>obj</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                要被移除的物件</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>allowDestroyingAssets</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">bool</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                Assets 資源一併刪除</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>// 刪除 texture，texture(xxx.png) 在 Inspector 面板已經不能觀察其相關屬性
-var s = GameObject.Find("Ball");
-var mr = s.GetComponent&lt;MeshRenderer&gt;();
-Object.DestroyImmediate(mr.material.mainTexture, true);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".DontDestroyOnLoad">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.DontDestroyOnLoad<span class="signature">(target)</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line75">line 75</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        場景更換後不刪除物件。如果該物件為 GameObject，會保留其 Transform 子 GameObject。
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>target</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                場景更換後不刪除的物件</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>var s = GameObject.Find("Ball");
-Object.DontDestroyOnLoad(s);
-SceneManager.LoadScene("Scene2"); // SceneManager 需要 using UnityEngine.SceneManagement</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".FindObjectOfType">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.FindObjectOfType<span class="signature">(type)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Object}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line85">line 85</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        尋找第一個指定型態物件
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Type</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                指定要尋找的物件類型</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        Object
-                        
-                    
-            </td>
-            <td class="description last">回傳配對型態的物件，如果沒有回傳 null</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>var script = Object.FindObjectOfType(typeof(MonoBehaviour)); // 找到第一個執行中腳本
-Debug.Log(script);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".FindObjectsOfType">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.FindObjectsOfType<span class="signature">(type)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Array.&lt;Object>}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line95">line 95</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        尋找指定型態物件陣列
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Type</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                指定要尋找的物件類型</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        Array.&lt;Object>
-                        
-                    
-            </td>
-            <td class="description last">回傳配對型態的物件陣列</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>var scripts = Object.FindObjectsOfType(typeof(MonoBehaviour)); // 找所有執行中腳本
-foreach(var script in scripts) Debug.Log(script);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".Instantiate">
-            
-            <span class="type-signature static">static</span>UnityEngine.Object.Instantiate<span class="signature">(original, <span class="optional">parent</span>, <span class="optional">instantiateInWorldSpace</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Object}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line107">line 107</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        拷貝物件
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>original</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                你想要拷貝的物件</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>parent</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Transform</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                配置物件的父變換組件</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>instantiateInWorldSpace</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">bool</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                如果為 true 則配置拷貝物件大小旋轉縮放為初始值如座標為 0,0,0。如果為 false 則配置拷貝物件大小旋轉縮放值為父變換組件的拷貝</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        Object
-                        
-                    
-            </td>
-            <td class="description last">回傳拷貝的物件</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint"><code>var cube = GameObject.Find("Cube");
-Object.Instantiate(cube, cube.transform, true);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="GetInstanceID">
-            
-            GetInstanceID<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line37">line 37</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        回傳物件唯一識別ID
-    </div>
-    
-
-    
-    
-    
-    
     
     
     
@@ -1739,7 +1012,7 @@ Object.Instantiate(cube, cube.transform, true);</code></pre>
                         
                     
             </td>
-            <td class="description last">id</td>
+            <td class="description last">絕對值</td>
         </tr>
     
     </tbody>
@@ -1748,20 +1021,28 @@ Object.Instantiate(cube, cube.transform, true);</code></pre>
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.Abs(-10.5f)); // 10.5</code></pre>
+    
+
+    
 </dd>
 
         
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="ToString">
+        <h4 class="name" id=".Acos">
             
-            ToString<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{string}</span>
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Acos<span class="signature">(f)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
         </h4>
     
         
         <div class="tag-source">
-            <a href="Object.js.html">Object.js</a>, <a href="Object.js.html#line43">line 43</a>
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line93">line 93</a>
         </div>
         
     </div>
@@ -1772,7 +1053,7 @@ Object.Instantiate(cube, cube.transform, true);</code></pre>
     
     
     <div class="description">
-        轉字串
+        知道兩個邊邊長但是想知道兩個邊夾角時用
     </div>
     
 
@@ -1780,6 +1061,51 @@ Object.Instantiate(cube, cube.transform, true);</code></pre>
     
     
     
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                兩邊比值</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -1835,11 +1161,2360 @@ Object.Instantiate(cube, cube.transform, true);</code></pre>
             
             <td class="type">
             
-                        string
+                        float
                         
                     
             </td>
-            <td class="description last">回傳物件名稱</td>
+            <td class="description last">弳度</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 斜邊 2, 鄰邊 1, 求夾角幾度？
+Debug.Log(Mathf.Acos(1.0f / 2.0f) * Mathf.Rad2Deg); // 60</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Approximately">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Approximately<span class="signature">(a, b)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line102">line 102</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        約略比較，請參考 Mathf.Epsilon
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                任意數字</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                任意數字</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>if(Mathf.Approximately(1.0f, 10.0f / 10.0f)) print("兩者大約相同");</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Asin">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Asin<span class="signature">(f)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line109">line 109</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        知道斜邊與對邊求夾角
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                兩邊比值</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        float
+                        
+                    
+            </td>
+            <td class="description last">弳度</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Atan">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Atan<span class="signature">(f)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line116">line 116</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        知道鄰邊與對邊求夾角
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                兩邊比值</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        float
+                        
+                    
+            </td>
+            <td class="description last">弳度</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Atan2">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Atan2<span class="signature">(y, x)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line133">line 133</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        知道鄰邊與對邊求夾角，<br>
+atan2(a,b)是4象限反正切，它的取值不僅取決於正切值a/b，還取決於點 (b, a) 落入哪個象限：<br>
+當點(b, a) 落入第一象限时，atan2(a,b)的範圍是 0～pi/2;<br>
+當點(b, a) 落入第二象限时，atan2(a,b)的範圍是 pi/2～pi;<br>
+當點(b, a) 落入第三象限时，atan2(a,b)的範圍是 －pi～－pi/2;<br>
+當點(b, a) 落入第四象限时，atan2(a,b)的範圍是 -pi/2～0;<br>
+而 atan(a/b) 僅僅根據正切值为a/b求出對應的角度 （可以看作僅僅是2象限反正切）：<br>
+當 a/b > 0 时，atan(a/b)取值範圍是 0～pi/2;<br>
+當 a/b < 0 时，atan(a/b)取值範圍是 -pi/2～0;<br>
+與 atan 相異範例：a = 1, b = -1，則 atan(a/b) = atan(-1) = -pi/4(-45度), 而 atan2(a,b) = 3 * pi/4(135度)
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                座標</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                座標</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        float
+                        
+                    
+            </td>
+            <td class="description last">弳度</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Ceil">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Ceil<span class="signature">(f)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line140">line 140</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        比 f 大的最小整數
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                浮點數</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        float
+                        
+                    
+            </td>
+            <td class="description last">比 f 大的最小浮點整數</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".CeilToInt">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.CeilToInt<span class="signature">(f)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{int}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line147">line 147</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        比 f 大的最小整數
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                浮點數</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        int
+                        
+                    
+            </td>
+            <td class="description last">比 f 大的最小整數</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Clamp">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Clamp<span class="signature">(value, min, max)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line158">line 158</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        讓數值夾在最小跟最大值範圍內
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                任意浮點數</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>min</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                最小值</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>max</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                最大值</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        float
+                        
+                    
+            </td>
+            <td class="description last">範圍內之值</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.Clamp(1.1f,0.0f,1.0f)); // 1</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Clamp01">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Clamp01<span class="signature">(value)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line167">line 167</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        讓數值夾在 0 跟 1 範圍內
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                任意浮點數</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        float
+                        
+                    
+            </td>
+            <td class="description last">範圍內之值</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.Clamp01(1.1f)); // 1</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".ClosestPowerOfTwo">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.ClosestPowerOfTwo<span class="signature">(value)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{int}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line180">line 180</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        2 的 Ｎ 次方最接近值
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                任意整數</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        int
+                        
+                    
+            </td>
+            <td class="description last">2 的 Ｎ 次方</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.ClosestPowerOfTwo(2)); // 2
+Debug.Log(Mathf.ClosestPowerOfTwo(3)); // 4
+Debug.Log(Mathf.ClosestPowerOfTwo(4)); // 4
+Debug.Log(Mathf.ClosestPowerOfTwo(5)); // 4
+Debug.Log(Mathf.ClosestPowerOfTwo(6)); // 8</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".CorrelatedColorTemperatureToRGB">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.CorrelatedColorTemperatureToRGB<span class="signature">(kelvin)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Color}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line191">line 191</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        色溫轉 RGBA 顏色。
+色溫，以絕對溫度K來表示，即把標準黑體加熱，溫度升高到一定程度時該黑體顏色開始深紅-淺紅-橙黃-白-藍，逐漸改變，某光源與黑體的顏色相同時，我們把黑體當的絕對溫度稱為該光源的色溫。
+測量單位是Kelvin (°K)度。數值越低紅色越強，數值越高藍色越強。
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>kelvin</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                範圍從 1000 到 40000 Kelvin</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Color
+                        
+                    
+            </td>
+            <td class="description last">色溫轉顏色</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.CorrelatedColorTemperatureToRGB(1000.0f)); // RGBA(1.000, 0.042, 0.003, 1.000)</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Cos">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Cos<span class="signature">(f)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line200">line 200</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        取餘弦值
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                弳度</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        float
+                        
+                    
+            </td>
+            <td class="description last">兩邊比值</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.Cos(60 * Mathf.Deg2Rad)); // 0.5</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".DeltaAngle">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.DeltaAngle<span class="signature">(current, target)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line210">line 210</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        取角度變換值
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>current</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                目前角度</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                目標角度</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        float
+                        
+                    
+            </td>
+            <td class="description last">角度變換值</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.DeltaAngle(100, 90)); // -10</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Exp">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Exp<span class="signature">(power)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line219">line 219</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        指數函數
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>power</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                次方</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        float
+                        
+                    
+            </td>
+            <td class="description last">歐拉數</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Debug.Log(Mathf.Exp(1)); // 2.718282</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".Floor">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.Floor<span class="signature">(f)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{float}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line226">line 226</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        比 f 小的最大整數
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                浮點數</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        float
+                        
+                    
+            </td>
+            <td class="description last">比 f 小的最大浮點整數</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".FloorToInt">
+            
+            <span class="type-signature static">static</span>UnityEngine.Mathf.FloorToInt<span class="signature">(f)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{int}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Mathf.js.html">Mathf.js</a>, <a href="Mathf.js.html#line233">line 233</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        比 f 小的最大整數
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                浮點數</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        int
+                        
+                    
+            </td>
+            <td class="description last">比 f 小的最大整數</td>
         </tr>
     
     </tbody>
