@@ -235,6 +235,60 @@
             
                 <li data-name="UnityEngine.Mathf.FloorToInt"><a href="UnityEngine.Mathf.html#.FloorToInt">FloorToInt</a></li>
             
+                <li data-name="UnityEngine.Mathf.GammaToLinearSpace"><a href="UnityEngine.Mathf.html#.GammaToLinearSpace">GammaToLinearSpace</a></li>
+            
+                <li data-name="UnityEngine.Mathf.InverseLerp"><a href="UnityEngine.Mathf.html#.InverseLerp">InverseLerp</a></li>
+            
+                <li data-name="UnityEngine.Mathf.IsPowerOfTwo"><a href="UnityEngine.Mathf.html#.IsPowerOfTwo">IsPowerOfTwo</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Lerp"><a href="UnityEngine.Mathf.html#.Lerp">Lerp</a></li>
+            
+                <li data-name="UnityEngine.Mathf.LerpAngle"><a href="UnityEngine.Mathf.html#.LerpAngle">LerpAngle</a></li>
+            
+                <li data-name="UnityEngine.Mathf.LerpUnclamped"><a href="UnityEngine.Mathf.html#.LerpUnclamped">LerpUnclamped</a></li>
+            
+                <li data-name="UnityEngine.Mathf.LinearToGammaSpace"><a href="UnityEngine.Mathf.html#.LinearToGammaSpace">LinearToGammaSpace</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Log"><a href="UnityEngine.Mathf.html#.Log">Log</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Log10"><a href="UnityEngine.Mathf.html#.Log10">Log10</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Max"><a href="UnityEngine.Mathf.html#.Max">Max</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Min"><a href="UnityEngine.Mathf.html#.Min">Min</a></li>
+            
+                <li data-name="UnityEngine.Mathf.MoveTowards"><a href="UnityEngine.Mathf.html#.MoveTowards">MoveTowards</a></li>
+            
+                <li data-name="UnityEngine.Mathf.MoveTowardsAngle"><a href="UnityEngine.Mathf.html#.MoveTowardsAngle">MoveTowardsAngle</a></li>
+            
+                <li data-name="UnityEngine.Mathf.NextPowerOfTwo"><a href="UnityEngine.Mathf.html#.NextPowerOfTwo">NextPowerOfTwo</a></li>
+            
+                <li data-name="UnityEngine.Mathf.PerlinNoise"><a href="UnityEngine.Mathf.html#.PerlinNoise">PerlinNoise</a></li>
+            
+                <li data-name="UnityEngine.Mathf.PingPong"><a href="UnityEngine.Mathf.html#.PingPong">PingPong</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Pow"><a href="UnityEngine.Mathf.html#.Pow">Pow</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Repeat"><a href="UnityEngine.Mathf.html#.Repeat">Repeat</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Round"><a href="UnityEngine.Mathf.html#.Round">Round</a></li>
+            
+                <li data-name="UnityEngine.Mathf.RoundToInt"><a href="UnityEngine.Mathf.html#.RoundToInt">RoundToInt</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Sign"><a href="UnityEngine.Mathf.html#.Sign">Sign</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Sin"><a href="UnityEngine.Mathf.html#.Sin">Sin</a></li>
+            
+                <li data-name="UnityEngine.Mathf.SmoothDamp"><a href="UnityEngine.Mathf.html#.SmoothDamp">SmoothDamp</a></li>
+            
+                <li data-name="UnityEngine.Mathf.SmoothDampAngle"><a href="UnityEngine.Mathf.html#.SmoothDampAngle">SmoothDampAngle</a></li>
+            
+                <li data-name="UnityEngine.Mathf.SmoothStep"><a href="UnityEngine.Mathf.html#.SmoothStep">SmoothStep</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Sqrt"><a href="UnityEngine.Mathf.html#.Sqrt">Sqrt</a></li>
+            
+                <li data-name="UnityEngine.Mathf.Tan"><a href="UnityEngine.Mathf.html#.Tan">Tan</a></li>
+            
             </ul>
             <ul class="events itemMembers">
             
@@ -549,7 +603,7 @@ UnityEngine.Mathf = class {
     static Atan(f) {}
 
     /**
-     * 知道鄰邊與對邊求夾角，&lt;br>
+     * 知道座標求夾角，&lt;br>
      * atan2(a,b)是4象限反正切，它的取值不僅取決於正切值a/b，還取決於點 (b, a) 落入哪個象限：&lt;br>
      * 當點(b, a) 落入第一象限时，atan2(a,b)的範圍是 0～pi/2;&lt;br>
      * 當點(b, a) 落入第二象限时，atan2(a,b)的範圍是 pi/2～pi;&lt;br>
@@ -665,7 +719,307 @@ UnityEngine.Mathf = class {
      */
     static FloorToInt(f) {}
     
+    /**
+     * Gamma 轉 Linear 空間亮度值
+     * {@link https://zhuanlan.zhihu.com/p/66558476|Gamma、Linear、sRGB 和 Unity Color Space，你真懂了吗？}
+     * @param {float} value - Gamma值
+     * @return {float} 線性空間亮度值
+     */
+    static GammaToLinearSpace(value) {}
+
+    /**
+     * 反轉線性插值
+     * @param {float} a - 開始值
+     * @param {float} b - 結束值
+     * @param {float} value - a,b 之間的值
+     * @return {float} 回傳 0 ~ 1 之間的補插值
+     * @example
+     * Debug.Log(Mathf.InverseLerp(0, 10, -1)); // 0，-1 小於 0 則回傳 0
+     * Debug.Log(Mathf.InverseLerp(0, 10, 0)); // 0
+     * Debug.Log(Mathf.InverseLerp(0, 10, 5)); // 0.5
+     * Debug.Log(Mathf.InverseLerp(0, 10, 10)); // 1
+     * Debug.Log(Mathf.InverseLerp(0, 10, 11)); // 1，-11 大於 10 則回傳 1
+     */
+    static InverseLerp(a, b, value) {}
+
+    /**
+     * 是否為 2 的 Ｎ 次方
+     * @param {int} value - 任意整數
+     * @return {bool} 是否為 2 的 Ｎ 次方
+     */
+    static IsPowerOfTwo(value) {}
+
+    /**
+     * 線性插值
+     * @param {float} a - 開始值
+     * @param {float} b - 結束值
+     * @param {float} t - 0 ~ 1 之間的補插值
+     * @return {float} 回傳 a ~ b 之間的值
+     * 
+     */
+    static Lerp(a, b, t) {}
+
+    /**
+     * 角度線性插值
+     * @param {float} a - 角度開始值
+     * @param {float} b - 角度結束值
+     * @param {float} t - 0 ~ 1 之間的補插值
+     * @return {float} 回傳 a ~ b 之間的值
+     */
+    static LerpAngle(a, b, t) {}
+
+    /**
+     * 未限制線性插值
+     * @param {float} a - 開始值
+     * @param {float} b - 結束值
+     * @param {float} t - 不限制 0 ~ 1 之間的補插值
+     * @return {float} 回傳不限制 a ~ b 之間的值
+     * @example
+     * Debug.Log(Mathf.LerpUnclamped(0, 10, -1)); // -10
+     */
+    static LerpUnclamped(a, b, t) {}
+
+    /**
+     * Linear 轉 Gamma 空間亮度值
+     * {@link https://zhuanlan.zhihu.com/p/66558476|Gamma、Linear、sRGB 和 Unity Color Space，你真懂了吗？}
+     * @param {float} value - 線性空間亮度值
+     * @return {float} Gamma值
+     */
+    static LinearToGammaSpace(value) {}
+
+    /**
+     * 對數函數
+     * @param {float} f - 任意數
+     * @param {float} p - 底數
+     * @return {float} 次方值
+     * @example
+     * print(Mathf.Log(4,2)); // 2
+     */
+    static Log(f, p) {}
+
+    /**
+     * 底數10的對數函數
+     * @param {float} f - 任意數
+     * @return {float} 次方值
+     * @example
+     * print(Mathf.Log10(100)); // 10
+     */
+    static Log10(f) {}
+
+    /**
+     * 取最大值
+     * @param {float} a - 任意數
+     * @param {float} b - 任意數
+     * @return {float} 最大值
+     * @example
+     * print(Mathf.Max(1,2)); // 2
+     * print(Mathf.Max(1,2,3)); // 3
+     */
+    static Max(a, b) {}
+
+    /**
+     * 取最小值
+     * @param {float} a - 任意數
+     * @param {float} b - 任意數
+     * @return {float} 最小值
+     * @example
+     * print(Mathf.Min(1,2)); // 1
+     * print(Mathf.Min(1,2,3)); // 1
+     */
+    static Min(a, b) {}
+
+    /**
+     * 等值變化
+     * @param {float} current - 目前數值
+     * @param {float} target - 目標數值
+     * @param {float} maxDelta - 變化數值
+     * @return {float} 變化後數值
+     * @example
+     * float cur = 0;
+     * void Update()
+     * {
+     *     print(cur); // 0 1 2 3 4 5 6 7 8 9 10 10 10 10 ...
+     *     cur = Mathf.MoveTowards(cur, 10, 1);
+     * }
+     */
+    static MoveTowards(current, target, maxDelta) {}
+
+    /**
+     * 角度等值變化
+     * @param {float} current - 目前數值
+     * @param {float} target - 目標數值
+     * @param {float} maxDelta - 變化數值
+     * @return {float} 變化後數值
+     * @example
+     * float cur = 0;
+     * float cur2 = 0;
+     * void Update()
+     * {
+     *     print(cur); // 0 -10 350 350 350 350 ...
+     *     cur = Mathf.MoveTowardsAngle(cur, 350, 10);
+     *     print(cur2); // 0 10 20 30 40 400 400 400 ...
+     *     cur2 = Mathf.MoveTowardsAngle(cur2, 400, 10);
+     * }
+     */
+    static MoveTowardsAngle(current, target, maxDelta) {}
+
+    /**
+     * 大於等於 value 的 2 的 Ｎ 次方最接近值
+     * @param {int} value - 任意整數
+     * @return {int} 2 的 Ｎ 次方
+     * @example
+     * Debug.Log(Mathf.NextPowerOfTwo(7)); // 8
+     * Debug.Log(Mathf.NextPowerOfTwo(139)); // 256
+     * Debug.Log(Mathf.NextPowerOfTwo(256)); // 256
+     */
+    static NextPowerOfTwo(value) {}
+
+    /**
+     * Perlin Noise 的特點是：返回值隨着 x,y 座標的移動，是連續且平緩的變化的隨機值，這點和 Random 是完全不同的，而且這個特點非常重要，應用範圍很廣。可以想象，把 x 或者 y 的值隨着時間去改變，會得到動態變化的一系列數值。
+就好像隨機地形山脈一樣，連綿起伏。{@link https://docs.unity3d.com/ScriptReference/Mathf.PerlinNoise.html|請參考官方範例}
+     * @param {float} x - x 座標
+     * @param {float} y - y 座標
+     * @return {float} 0 ~ 1 的值
+     */
+    static PerlinNoise(x, y) {}
+
+    /**
+     * 來回
+     * @param {float} t - 變換值
+     * @param {float} length - 限制範圍
+     * @return {float} 0 ~ length 的數
+     * @example
+     * Debug.Log(Mathf.PingPong(0, 3)); // 0
+     * Debug.Log(Mathf.PingPong(1, 3)); // 1
+     * Debug.Log(Mathf.PingPong(2, 3)); // 2
+     * Debug.Log(Mathf.PingPong(3, 3)); // 3
+     * Debug.Log(Mathf.PingPong(4, 3)); // 2
+     * Debug.Log(Mathf.PingPong(5, 3)); // 1
+     * Debug.Log(Mathf.PingPong(6, 3)); // 0
+     * Debug.Log(Mathf.PingPong(7, 3)); // 1
+     */
+    static PingPong(t, length) {}
     
+    /**
+     * f 的 p 次方
+     * @param {float} f - 底數
+     * @param {float} p - 指數
+     * @return {float} f 的 p 次方
+     * @example
+     * Debug.Log(Mathf.Pow(2, 3)); // 8
+     */
+    static Pow(f, p) {}
+
+    /**
+     * 反覆
+     * @param {float} t - 變換值
+     * @param {float} length - 限制範圍
+     * @return {float} 0 ~ length-1 的數
+     * @example
+     * Debug.Log(Mathf.Repeat(0, 3)); // 0
+     * Debug.Log(Mathf.Repeat(1, 3)); // 1
+     * Debug.Log(Mathf.Repeat(2, 3)); // 2
+     * Debug.Log(Mathf.Repeat(3, 3)); // 0
+     * Debug.Log(Mathf.Repeat(4, 3)); // 1
+     * Debug.Log(Mathf.Repeat(5, 3)); // 2
+     * Debug.Log(Mathf.Repeat(6, 3)); // 0
+     * Debug.Log(Mathf.Repeat(7, 3)); // 1
+     */
+    static Repeat(t, length) {}
+
+    /**
+     * 四捨五入取最接近 f 的整數
+     * @param {float} f - 浮點數
+     * @return {float} 最接近 f 的浮點整數
+     */
+    static Round(f) {}
+
+    /**
+     * 四捨五入取最接近 f 的整數
+     * @param {float} f - 浮點數
+     * @return {int} 最接近 f 的整數
+     */
+    static RoundToInt(f) {}
+
+    /**
+     * 取得正負
+     * @param {float} f - 浮點數
+     * @return {int} 1 或 -1
+     */
+    static Sign(f) {}
+
+    /**
+     * 取正弦值
+     * @param {float} f - 弳度
+     * @return {float} 兩邊比值
+     * @example
+     * Debug.Log(Mathf.Sin(30 * Mathf.Deg2Rad)); // 0.5
+     */
+    static Sin(f) {}
+
+    /**
+     * 滑順移動，開始加速結束減速
+     * @param {float} current - 目前值
+     * @param {float} target - 目標值
+     * @param {ref_float} currentVelocity - 變化速度
+     * @param {float} smoothTime - 約略花費時間
+     * @param {float} [maxSpeed=Mathf.Infinity] - 速度上限
+     * @param {float} [deltaTime=Time.deltaTime] - 從最後一次呼叫此函式的時間
+     * @return {float} 新值
+     * @example
+     * float smoothTime = .3f;
+     * float velocity = 0.0f;
+     * void Update()
+     * {
+     *     var cube = GameObject.Find("Cube"); // 建議在 Start 函式使用以節省效能
+     *     float newPosition = Mathf.SmoothDamp(cube.transform.position.x, 10, ref velocity, smoothTime);
+     *     cube.transform.position = new Vector3(newPosition, cube.transform.position.y, cube.transform.position.z);
+     * }
+     */
+    static SmoothDamp(current, target, currentVelocity, smoothTime, maxSpeed, deltaTime) {}
+
+    /**
+     * 角度滑順變化，開始加速結束減速
+     * @param {float} current - 目前值
+     * @param {float} target - 目標值
+     * @param {ref_float} currentVelocity - 變化速度
+     * @param {float} smoothTime - 約略花費時間
+     * @param {float} [maxSpeed=Mathf.Infinity] - 速度上限
+     * @param {float} [deltaTime=Time.deltaTime] - 從最後一次呼叫此函式的時間
+     * @return {float} 新值
+     */
+    static SmoothDampAngle(current, target, currentVelocity, smoothTime, maxSpeed, deltaTime) {}
+
+    /**
+     * 開始加速結束減速，可做自然的動畫補間     
+     * @param {float} a - 開始值
+     * @param {float} b - 結束值
+     * @param {float} t - 0 ~ 1 之間的插值
+     * @return {float} 回傳 a ~ b 之間的值
+     * 
+     */
+    static SmoothStep(a, b, t) {}
+
+    // SmoothDamp
+    // SmoothDampAngle
+    // SmoothStep
+
+    /**
+     * 開方
+     * @param {float} f - 任意值
+     * @return {float} 開方值
+     * @example
+     * // 取距離
+     * Debug.Log(Mathf.Sqrt(A*A+B*B));
+     */
+    static Sqrt(f) {}
+
+    /**
+     * 取正切值
+     * @param {float} f - 弳度
+     * @return {float} 兩邊比值
+     */
+    static Tan(f) {}
     
 }</code></pre>
         </article>
@@ -679,7 +1033,7 @@ UnityEngine.Mathf = class {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Fri Feb 28 2020 12:59:19 GMT+0800 (GMT+08:00)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Feb 29 2020 19:16:19 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>
