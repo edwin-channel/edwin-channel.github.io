@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Class: Component</title>
+    <title>Class: Behaviour</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -566,7 +566,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="UnityEngine.Component.html">Class: Component</h1>
+        <h1 class="page-title" data-filename="UnityEngine.Behaviour.html">Class: Behaviour</h1>
         
 
 
@@ -575,10 +575,10 @@
     
 <header>
     <h2>
-    Component
+    Behaviour
     </h2>
     
-        <div class="class-description">所有附加到 GameObject 的組件基類</div>
+        <div class="class-description">指可啟用或禁用的組件</div>
     
 </header>  
 
@@ -590,14 +590,14 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="Component">
+        <h4 class="name" id="Behaviour">
             
-            new UnityEngine.Component<span class="signature">()</span>
+            new UnityEngine.Behaviour<span class="signature">()</span>
         </h4>
     
         
         <div class="tag-source">
-            <a href="Component.js.html">Component.js</a>, <a href="Component.js.html#line34">line 34</a>
+            <a href="Behaviour.js.html">Behaviour.js</a>, <a href="Behaviour.js.html#line31">line 31</a>
         </div>
         
     </div>
@@ -608,7 +608,7 @@
     
     
     <div class="description">
-        附加到 GameObject 的組件基類
+        Behaviour 建構子
     </div>
     
 
@@ -664,7 +664,7 @@
         <h3 class="subsection-title">Extends</h3>
         
         <ul>
-            <li><a href="UnityEngine.Object.html">UnityEngine.Object</a></li>
+            <li><a href="UnityEngine.Component.html">UnityEngine.Component</a></li>
         </ul>
     
     
@@ -680,6 +680,64 @@
         <h3 class="subsection-title">Members</h3>
         
         <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="enabled">enabled</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        啟用的 Behaviour 可更新，禁用的 Behaviour 不可更新。複選框開關。<br>
+GameObject = Active AND Script = Enabled 然后 Behaviour.enabled = true.<br>
+GameObject = Active AND Script = Disabled 然后 Behaviour.enabled = false.<br>
+GameObject = Inactive AND Script = Enabled 然后 Behaviour.enabled = true.<br>
+GameObject = Inactive AND Script = Disabled 然后 Behaviour.enabled = false.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>// 複選框取消
+this.enabled = false;</code></pre>
+    
+
+    
+</dd>
+
+        
             
 <dt>
     <div class="nameContainer">
@@ -788,6 +846,55 @@ this.gameObject.hideFlags = HideFlags.HideInInspector;
 this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
     
 
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="isActiveAndEnabled">isActiveAndEnabled</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        檢查是否為激活且啟用。<br>
+GameObject = Active AND Script = Enabled 然后 isActiveAndEnabled = true.<br>
+GameObject = Active AND Script = Disabled 然后 isActiveAndEnabled = false.<br>
+GameObject = Inactive AND Script = Enabled 然后 isActiveAndEnabled = false.<br>
+GameObject = Inactive AND Script = Disabled 然后 isActiveAndEnabled = false.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
     
 </dd>
 
@@ -964,8 +1071,10 @@ var players = GameObject.FindGameObjectsWithTag("Player");</code></pre>
         <dl>
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="BroadcastMessage">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#BroadcastMessage">inherited</a></span>
             
             BroadcastMessage<span class="signature">(methodName, <span class="optional">parameter</span>, <span class="optional">options</span>)</span>
         </h4>
@@ -1174,8 +1283,10 @@ BroadcastMessage("Test"); // 父子 Test 函式都會呼叫</code></pre>
         
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="CompareTag">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#CompareTag">inherited</a></span>
             
             CompareTag<span class="signature">(tag)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{bool}</span>
         </h4>
@@ -1334,8 +1445,10 @@ void OnTriggerEnter(Collider other)
         
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="GetComponent">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#GetComponent">inherited</a></span>
             
             GetComponent<span class="signature">(type)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Component}</span>
         </h4>
@@ -1488,8 +1601,10 @@ Debug.Log(script);</code></pre>
         
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="GetComponentInChildren">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#GetComponentInChildren">inherited</a></span>
             
             GetComponentInChildren<span class="signature">(type)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Component}</span>
         </h4>
@@ -1642,8 +1757,10 @@ Debug.Log(script);</code></pre>
         
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="GetComponentInParent">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#GetComponentInParent">inherited</a></span>
             
             GetComponentInParent<span class="signature">(type)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Component}</span>
         </h4>
@@ -1796,8 +1913,10 @@ Debug.Log(script);</code></pre>
         
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="GetComponents">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#GetComponents">inherited</a></span>
             
             GetComponents<span class="signature">(type)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Array.&lt;Component>}</span>
         </h4>
@@ -1950,8 +2069,10 @@ foreach(var script in scripts) Debug.Log(script);</code></pre>
         
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="GetComponentsInChildren">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#GetComponentsInChildren">inherited</a></span>
             
             GetComponentsInChildren<span class="signature">(type)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Array.&lt;Component>}</span>
         </h4>
@@ -2104,8 +2225,10 @@ foreach(var script in scripts) Debug.Log(script);</code></pre>
         
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="GetComponentsInParent">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#GetComponentsInParent">inherited</a></span>
             
             GetComponentsInParent<span class="signature">(type)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Array.&lt;Component>}</span>
         </h4>
@@ -2360,8 +2483,10 @@ foreach(var script in scripts) Debug.Log(script);</code></pre>
         
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="SendMessage">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#SendMessage">inherited</a></span>
             
             SendMessage<span class="signature">(methodName, <span class="optional">parameter</span>, <span class="optional">options</span>)</span>
         </h4>
@@ -2570,8 +2695,10 @@ SendMessage("Test"); // 父 Test 函式會呼叫，子 Test 函式不會呼叫</
         
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="SendMessageUpwards">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#SendMessageUpwards">inherited</a></span>
             
             SendMessageUpwards<span class="signature">(methodName, <span class="optional">parameter</span>, <span class="optional">options</span>)</span>
         </h4>
@@ -2882,8 +3009,10 @@ SendMessageUpwards("Test"); // 父子 Test 函式都會呼叫</code></pre>
         
             
 <dt>
-    <div class="nameContainer">
+    <div class="nameContainer inherited">
         <h4 class="name" id="TryGetComponent">
+            
+                <span class="inherited"><a href="UnityEngine.Component.html#TryGetComponent">inherited</a></span>
             
             TryGetComponent<span class="signature">(type, component)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{bool}</span>
         </h4>
