@@ -377,6 +377,16 @@
             </ul>
             <ul class="methods itemMembers">
             
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UnityEngine.MonoBehaviour#CancelInvoke"><a href="UnityEngine.MonoBehaviour.html#CancelInvoke">CancelInvoke</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#Invoke"><a href="UnityEngine.MonoBehaviour.html#Invoke">Invoke</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#InvokeRepeating"><a href="UnityEngine.MonoBehaviour.html#InvokeRepeating">InvokeRepeating</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#IsInvoking"><a href="UnityEngine.MonoBehaviour.html#IsInvoking">IsInvoking</a></li>
+            
             </ul>
             <ul class="events itemMembers">
             
@@ -578,8 +588,7 @@
     MonoBehaviour
     </h2>
     
-        <div class="class-description">所有 unity 腳本的基類
-extends UnityEngine.Behaviour</div>
+        <div class="class-description">所有 unity 腳本的基類extends UnityEngine.Behaviour</div>
     
 </header>  
 
@@ -598,7 +607,7 @@ extends UnityEngine.Behaviour</div>
     
         
         <div class="tag-source">
-            <a href="MonoBehaviour.js.html">MonoBehaviour.js</a>, <a href="MonoBehaviour.js.html#line68">line 68</a>
+            <a href="MonoBehaviour.js.html">MonoBehaviour.js</a>, <a href="MonoBehaviour.js.html#line71">line 71</a>
         </div>
         
     </div>
@@ -721,52 +730,7 @@ extends UnityEngine.Behaviour</div>
         
 
     
-    <pre class="prettyprint"><code>// 請添加下面兩段程式碼，然後選擇 Example/runInEditMode，並在檢視面板開關 MonoBehaviour 的複選筐開關觀察
-// 建立 Editor 腳本
-using UnityEditor;
-using UnityEngine;
-public class Example
-{
-    // 請觀察視窗上方工具列會多了 Example 選項
-    [MenuItem("Example/runInEditMode")]
-    static void runInEditMode()
-    {
-        GameObject.Find("Main Camera").GetComponent<MonoBehaviour>().runInEditMode = true;
-    }
-
-    [MenuItem("Example/notRunInEditMode")]
-    static void notRunInEditMode()
-    {
-        GameObject.Find("Main Camera").GetComponent<MonoBehaviour>().runInEditMode = false;
-    }
-}
-
-// Main Camera 腳本
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-public class Main : MonoBehaviour
-{
-    void Start()
-    {
-        print("Start!");
-    }
-
-    void Update()
-    {
-        print("Update!");
-    }
-
-    private void OnEnable()
-    {
-        print("OnEnable!");
-    }
-
-    private void OnDisable()
-    {
-        print("OnDisable!");
-    }
-}</code></pre>
+    <pre class="prettyprint"><code>// 請添加下面兩段程式碼，然後選擇 Example/runInEditMode，並在檢視面板開關 MonoBehaviour 的複選筐開關觀察// 建立 Editor 腳本using UnityEditor;using UnityEngine;public class Example{    // 請觀察視窗上方工具列會多了 Example 選項    [MenuItem("Example/runInEditMode")]    static void runInEditMode()    {        GameObject.Find("Main Camera").GetComponent<MonoBehaviour>().runInEditMode = true;    }    [MenuItem("Example/notRunInEditMode")]    static void notRunInEditMode()    {        GameObject.Find("Main Camera").GetComponent<MonoBehaviour>().runInEditMode = false;    }}// Main Camera 腳本using System.Collections;using System.Collections.Generic;using UnityEngine;public class Main : MonoBehaviour{    void Start()    {        print("Start!");    }    void Update()    {        print("Update!");    }    private void OnEnable()    {        print("OnEnable!");    }    private void OnDisable()    {        print("OnDisable!");    }}</code></pre>
     
 
     
@@ -784,8 +748,7 @@ public class Main : MonoBehaviour
 <dd>
     
     <div class="description">
-        尽量减少使用GUILayout. 如果您根本没有从一个OnGUI()调用中使用GUILayout，则可以禁用所有GUILayout 渲染使用MonoBehaviour.useGUILayout = false; 这使GUI渲染性能提高了一倍. 最后，在渲染3D 场景时使用最少的GUI元素尽可能 .
-这个变量控制继承的胶板代码能否跳过GUI的layout阶段。如果这个变量为true，那么我们写在OnGUI函数中的代码都不会被执行。有时候我们喜欢用OnGUI来进行一些调试信息的输出，但是，OnGUI函数是很消耗系统资源的，使用该变量可以方便的控制调试信息的打开与关闭
+        即时模式 GUI (IMGUI)是一個程式碼驅動的 GUI 系統，主要用作程式設計師的工具。創建遊戲內調試顯示和工具。IMGUI 系统通常不適合用于玩家可能使用和交互的普通遊戲内用户界面。使用更多控件時，UnityGUI 會消耗更多資源. 在您的遊戲運行時，最好將 UnityGUI 的使用限制為遊戲菜單或非常小的 GUI 控件. 重要的是要注意，每個带有包含 OnGUI() 調用的脚本的對象都將需要額外的處理器時間 - 即使它是一個空的 OnGUI() 塊. 如果未使用 GUI 控件，則最好禁用任何具有 OnGUI() 調用的脚本. 您可以通過将脚本標記為 enabled = false.另外盡量减少使用 GUILayout. 如果您根本没有從一個 OnGUI() 調用中使用 GUILayout，則可以禁用所有 GUILayout 渲染使用 MonoBehaviour.useGUILayout = false; 這使 GUI 渲染性能提高了一倍. 最後，在渲染 3D 場景時盡可能使用最少的 GUI 元素.
     </div>
     
     
@@ -822,6 +785,559 @@ public class Main : MonoBehaviour
     
     
     
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="CancelInvoke">
+            
+            CancelInvoke<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="MonoBehaviour.js.html">MonoBehaviour.js</a>, <a href="MonoBehaviour.js.html#line94">line 94</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        取消定時觸發器
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>using UnityEngine;public class MainScript : MonoBehaviour{    void Start()    {        InvokeRepeating("setIntervalFunc", 0, 1); // 0 秒開始每秒觸發一次    }    void setIntervalFunc() {        print("setIntervalFunc call!");    }    void Update()    {        if (Input.GetKeyDown(KeyCode.Space)) CancelInvoke();    }}</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="Invoke">
+            
+            Invoke<span class="signature">(methodName, time)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="MonoBehaviour.js.html">MonoBehaviour.js</a>, <a href="MonoBehaviour.js.html#line114">line 114</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        單次定時觸發器
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>methodName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                要觸發的函式名</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>time</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                多久後開始觸發</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>using UnityEngine;public class MainScript : MonoBehaviour{    void Start()    {        Invoke("setTimeoutFunc", 0);    }    void setTimeoutFunc() {        print("setTimeoutFunc call!");    }}</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="InvokeRepeating">
+            
+            InvokeRepeating<span class="signature">(methodName, time, repeatRate)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="MonoBehaviour.js.html">MonoBehaviour.js</a>, <a href="MonoBehaviour.js.html#line135">line 135</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        循環定時觸發器
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>methodName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                要觸發的函式名</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>time</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                多久後開始觸發</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>repeatRate</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                多久觸發一次</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>using UnityEngine;public class MainScript : MonoBehaviour{    void Start()    {        InvokeRepeating("setIntervalFunc", 0, 1); // 0 秒開始每秒觸發一次    }    void setTimeoutFunc() {        print("setIntervalFunc call!");    }}</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="IsInvoking">
+            
+            IsInvoking<span class="signature">(methodName)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{bool}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="MonoBehaviour.js.html">MonoBehaviour.js</a>, <a href="MonoBehaviour.js.html#line155">line 155</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        函式是否觸發中
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>methodName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                觸發的函式名</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        bool
+                        
+                    
+            </td>
+            <td class="description last">是否觸發中</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>using UnityEngine;public class MainScript : MonoBehaviour{    void Update()    {        if(Input.GetKeyDown(KeyCode.Space) && !IsInvoking("setTimeoutFunc")) Invoke("setTimeoutFunc", 0);    }    void setTimeoutFunc() {        print("setTimeoutFunc call!");    }}</code></pre>
+    
+
+    
+</dd>
+
+        </dl>
+    
     
     
     
@@ -837,7 +1353,7 @@ public class Main : MonoBehaviour
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sun Mar 01 2020 20:00:59 GMT+0800 (GMT+08:00)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Mar 02 2020 14:09:50 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>

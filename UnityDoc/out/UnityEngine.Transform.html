@@ -377,6 +377,16 @@
             </ul>
             <ul class="methods itemMembers">
             
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UnityEngine.MonoBehaviour#CancelInvoke"><a href="UnityEngine.MonoBehaviour.html#CancelInvoke">CancelInvoke</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#Invoke"><a href="UnityEngine.MonoBehaviour.html#Invoke">Invoke</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#InvokeRepeating"><a href="UnityEngine.MonoBehaviour.html#InvokeRepeating">InvokeRepeating</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#IsInvoking"><a href="UnityEngine.MonoBehaviour.html#IsInvoking">IsInvoking</a></li>
+            
             </ul>
             <ul class="events itemMembers">
             
@@ -726,10 +736,7 @@
         
 
     
-    <pre class="prettyprint"><code>// Ball 為 Cube 的子 GameObject
-var parentGO = GameObject.Find("Cube");
-var childGO = GameObject.Find("Ball");
-Debug.Log(parentGO.transform.childCount); // 1</code></pre>
+    <pre class="prettyprint"><code>// Ball 為 Cube 的子 GameObjectvar parentGO = GameObject.Find("Cube");var childGO = GameObject.Find("Ball");Debug.Log(parentGO.transform.childCount); // 1</code></pre>
     
 
     
@@ -747,12 +754,7 @@ Debug.Log(parentGO.transform.childCount); // 1</code></pre>
 <dd>
     
     <div class="description">
-        使用三個角度來保存方位 (Inspector 的 rotation 若為根物件就是世界歐拉角)。<br>
-x(Pitch), z(Roll) 沿自身坐標系旋轉，y(Yaw) 沿世界坐標系旋轉。<br>
-歐拉角沒有方向大小的概念，借用 Vector3 儲存角度而不是向量，x,y,z 表示個軸向的旋轉角度。<br>
-程式設置角度時 x 限制在 -90 ~ 90 度之間, y,z -180 ~ 180 之間。<br>
-當物體旋轉 +90 或 -90度時，自身坐標系 z 軸與世界坐標系 y 軸會重合, 此時再沿 y 或 z 旋轉時, 將失去一個自由度，即萬向節死鎖。<br>
-萬向節死鎖狀態下沿 y 或 z 旋轉時，歸 z 軸旋轉。因為萬向節死鎖可改用四元數 this.transform.rotation。
+        使用三個角度來保存方位 (Inspector 的 rotation 若為根物件就是世界歐拉角)。<br>x(Pitch), z(Roll) 沿自身坐標系旋轉，y(Yaw) 沿世界坐標系旋轉。<br>歐拉角沒有方向大小的概念，借用 Vector3 儲存角度而不是向量，x,y,z 表示個軸向的旋轉角度。<br>程式設置角度時 x 限制在 -90 ~ 90 度之間, y,z -180 ~ 180 之間。<br>當物體旋轉 +90 或 -90度時，自身坐標系 z 軸與世界坐標系 y 軸會重合, 此時再沿 y 或 z 旋轉時, 將失去一個自由度，即萬向節死鎖。<br>萬向節死鎖狀態下沿 y 或 z 旋轉時，歸 z 軸旋轉。因為萬向節死鎖可改用四元數 this.transform.rotation。
     </div>
     
     
@@ -787,8 +789,7 @@ x(Pitch), z(Roll) 沿自身坐標系旋轉，y(Yaw) 沿世界坐標系旋轉。<
         
 
     
-    <pre class="prettyprint"><code>// 歐拉角的 x 增加 1 度
-this.transform.eulerAngles += new Vector3(1, 0, 0);</code></pre>
+    <pre class="prettyprint"><code>// 歐拉角的 x 增加 1 度this.transform.eulerAngles += new Vector3(1, 0, 0);</code></pre>
     
 
     
@@ -841,8 +842,7 @@ this.transform.eulerAngles += new Vector3(1, 0, 0);</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 沿 Z 軸前方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)
-Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.forward * 5, Color.red);</code></pre>
+    <pre class="prettyprint"><code>// 沿 Z 軸前方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.forward * 5, Color.red);</code></pre>
     
 
     
@@ -949,10 +949,7 @@ this.gameObject.hideFlags = HideFlags.HideInHierarchy;</code></pre>
         
 
     
-    <pre class="prettyprint"><code>if (cube.transform.hasChanged) {
-    Debug.Log("cube.transform.hasChanged");
-    cube.transform.hasChanged = false;
-}</code></pre>
+    <pre class="prettyprint"><code>if (cube.transform.hasChanged) {    Debug.Log("cube.transform.hasChanged");    cube.transform.hasChanged = false;}</code></pre>
     
 
     
@@ -1169,8 +1166,7 @@ this.gameObject.hideFlags = HideFlags.NotEditable;</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 歐拉角的 x 增加 1 度
-this.transform.localEulerAngles += new Vector3(1, 0, 0);</code></pre>
+    <pre class="prettyprint"><code>// 歐拉角的 x 增加 1 度this.transform.localEulerAngles += new Vector3(1, 0, 0);</code></pre>
     
 
     
@@ -1223,8 +1219,7 @@ this.transform.localEulerAngles += new Vector3(1, 0, 0);</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 父物件軸 x 增加 1
-this.transform.localPosition += new Vector3(1, 0, 0);</code></pre>
+    <pre class="prettyprint"><code>// 父物件軸 x 增加 1this.transform.localPosition += new Vector3(1, 0, 0);</code></pre>
     
 
     
@@ -1277,8 +1272,7 @@ this.transform.localPosition += new Vector3(1, 0, 0);</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 用四元數讓 x 增加 1 度
-this.transform.localRotation *= Quaternion.Euler(1, 0, 0);</code></pre>
+    <pre class="prettyprint"><code>// 用四元數讓 x 增加 1 度this.transform.localRotation *= Quaternion.Euler(1, 0, 0);</code></pre>
     
 
     
@@ -1331,8 +1325,7 @@ this.transform.localRotation *= Quaternion.Euler(1, 0, 0);</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 子物件放大兩倍
-this.transform.localScale *= 2;</code></pre>
+    <pre class="prettyprint"><code>// 子物件放大兩倍this.transform.localScale *= 2;</code></pre>
     
 
     
@@ -1430,10 +1423,7 @@ this.transform.localScale *= 2;</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 父子物件放大兩倍
-parentGO.transform.localScale *= 2;
-childGO.transform.localScale *= 2;
-Debug.Log(childGO.transform.lossyScale); // (4.0, 4.0, 4.0) 整體放大4倍</code></pre>
+    <pre class="prettyprint"><code>// 父子物件放大兩倍parentGO.transform.localScale *= 2;childGO.transform.localScale *= 2;Debug.Log(childGO.transform.lossyScale); // (4.0, 4.0, 4.0) 整體放大4倍</code></pre>
     
 
     
@@ -1542,9 +1532,7 @@ var enemy = GameObject.Find("enemy");</code></pre>
         
 
     
-    <pre class="prettyprint"><code>var parentGO = GameObject.Find("CubeSprite");
-var childGO = GameObject.Find("CubeSpriteSub");
-childGO.transform.parent = parentGO.transform;</code></pre>
+    <pre class="prettyprint"><code>var parentGO = GameObject.Find("CubeSprite");var childGO = GameObject.Find("CubeSpriteSub");childGO.transform.parent = parentGO.transform;</code></pre>
     
 
     
@@ -1597,8 +1585,7 @@ childGO.transform.parent = parentGO.transform;</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 軸 x 增加 1
-this.transform.position += new Vector3(1, 0, 0);</code></pre>
+    <pre class="prettyprint"><code>// 軸 x 增加 1this.transform.position += new Vector3(1, 0, 0);</code></pre>
     
 
     
@@ -1651,8 +1638,7 @@ this.transform.position += new Vector3(1, 0, 0);</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 沿 X 軸右方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)
-Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.right * 5, Color.red);</code></pre>
+    <pre class="prettyprint"><code>// 沿 X 軸右方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.right * 5, Color.red);</code></pre>
     
 
     
@@ -1705,11 +1691,7 @@ Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform
         
 
     
-    <pre class="prettyprint"><code>// parentGO 與 childGO 都在 Hierarchy 面板根節點
-var parentGO = GameObject.Find("CubeSprite");
-var childGO = GameObject.Find("CubeSpriteSub");
-hildGO.transform.parent = parentGO.transform;
-Debug.Log(childGO.transform.root == parentGO.transform); // True</code></pre>
+    <pre class="prettyprint"><code>// parentGO 與 childGO 都在 Hierarchy 面板根節點var parentGO = GameObject.Find("CubeSprite");var childGO = GameObject.Find("CubeSpriteSub");hildGO.transform.parent = parentGO.transform;Debug.Log(childGO.transform.root == parentGO.transform); // True</code></pre>
     
 
     
@@ -1727,14 +1709,7 @@ Debug.Log(childGO.transform.root == parentGO.transform); // True</code></pre>
 <dd>
     
     <div class="description">
-        世界座標旋轉角度。<br>
-無歐拉角角度限制與萬向節死鎖問題。<br>
-Quaternion 在 3D 圖形學中代表旋轉，由一個三維向量(x,y,z)和一個標量(w)組成。<br>
-旋轉軸為 V, 旋轉弧度為 θ, 如果使用四元數表示, 則四個分量為:<br>
-x = sin(θ/2) * V.x。<br>
-y = sin(θ/2) * V.y。<br>
-z = sin(θ/2) * V.z。<br>
-w = cos(θ/2)。
+        世界座標旋轉角度。<br>無歐拉角角度限制與萬向節死鎖問題。<br>Quaternion 在 3D 圖形學中代表旋轉，由一個三維向量(x,y,z)和一個標量(w)組成。<br>旋轉軸為 V, 旋轉弧度為 θ, 如果使用四元數表示, 則四個分量為:<br>x = sin(θ/2) * V.x。<br>y = sin(θ/2) * V.y。<br>z = sin(θ/2) * V.z。<br>w = cos(θ/2)。
     </div>
     
     
@@ -1769,22 +1744,7 @@ w = cos(θ/2)。
         
 
     
-    <pre class="prettyprint"><code>// 物體沿 y 軸旋轉 50 度
-var cube = GameObject.Find("CubeB");
-Quaternion qt = new Quaternion();
-Vector3 v = Vector3.up;
-float rad = 50 * Mathf.Deg2Rad;
-qt.x = Mathf.Sin(rad / 2) * v.x;
-qt.y = Mathf.Sin(rad / 2) * v.y;
-qt.z = Mathf.Sin(rad / 2) * v.z;
-qt.w = Mathf.Cos(rad / 2);
-cube.transform.rotation = qt;
-// 簡易寫法 (歐拉角轉四元數)
-cube.transform.rotation = Quaternion.Euler(0, 50, 0);
-// 用四元數讓 x 增加 1 度 (乘法表是組合旋轉，即旋轉角度疊加)
-cube.transform.rotation *= Quaternion.Euler(1, 0, 0);
-// Rotate 方法也是用四元數旋轉無死鎖現象
-cube.transform.Rotate(1,0,0);</code></pre>
+    <pre class="prettyprint"><code>// 物體沿 y 軸旋轉 50 度var cube = GameObject.Find("CubeB");Quaternion qt = new Quaternion();Vector3 v = Vector3.up;float rad = 50 * Mathf.Deg2Rad;qt.x = Mathf.Sin(rad / 2) * v.x;qt.y = Mathf.Sin(rad / 2) * v.y;qt.z = Mathf.Sin(rad / 2) * v.z;qt.w = Mathf.Cos(rad / 2);cube.transform.rotation = qt;// 簡易寫法 (歐拉角轉四元數)cube.transform.rotation = Quaternion.Euler(0, 50, 0);// 用四元數讓 x 增加 1 度 (乘法表是組合旋轉，即旋轉角度疊加)cube.transform.rotation *= Quaternion.Euler(1, 0, 0);// Rotate 方法也是用四元數旋轉無死鎖現象cube.transform.Rotate(1,0,0);</code></pre>
     
 
     
@@ -1945,8 +1905,7 @@ var players = GameObject.FindGameObjectsWithTag("Player");</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// 沿 Y 軸上方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)
-Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.up * 5, Color.red);</code></pre>
+    <pre class="prettyprint"><code>// 沿 Y 軸上方畫出單位長度 5 的紅線 (請在 Update 函式內畫線)Debug.DrawLine(cube.transform.position, cube.transform.position + cube.transform.up * 5, Color.red);</code></pre>
     
 
     
@@ -2450,10 +2409,7 @@ void OnTriggerEnter(Collider other)
         
 
     
-    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");
-var childGO = GameObject.Find("Sphere");
-// Sphere 元件會脫離 Cube 變成場景根物件
-parentGO.transform.DetachChildren();</code></pre>
+    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");var childGO = GameObject.Find("Sphere");// Sphere 元件會脫離 Cube 變成場景根物件parentGO.transform.DetachChildren();</code></pre>
     
 
     
@@ -2606,10 +2562,7 @@ parentGO.transform.DetachChildren();</code></pre>
         
 
     
-    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");
-var childGO = GameObject.Find("Sphere");
-// 找到子變換組件的 gameObject
-Debug.Log(parentGO.transform.Find("Sphere").gameObject);</code></pre>
+    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");var childGO = GameObject.Find("Sphere");// 找到子變換組件的 gameObjectDebug.Log(parentGO.transform.Find("Sphere").gameObject);</code></pre>
     
 
     
@@ -2762,10 +2715,7 @@ Debug.Log(parentGO.transform.Find("Sphere").gameObject);</code></pre>
         
 
     
-    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");
-var childGO = GameObject.Find("Sphere");
-// 找子變換組件
-Debug.Log(parentGO.transform.GetChild(0)); // Sphere (UnityEngine.Transform)</code></pre>
+    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");var childGO = GameObject.Find("Sphere");// 找子變換組件Debug.Log(parentGO.transform.GetChild(0)); // Sphere (UnityEngine.Transform)</code></pre>
     
 
     
@@ -3911,10 +3861,7 @@ foreach(var script in scripts) Debug.Log(script);</code></pre>
         
 
     
-    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");
-var childGO = GameObject.Find("Sphere");
-var childGO2 = GameObject.Find("Capsule");
-Debug.Log(childGO.transform.GetSiblingIndex()); // 0</code></pre>
+    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");var childGO = GameObject.Find("Sphere");var childGO2 = GameObject.Find("Capsule");Debug.Log(childGO.transform.GetSiblingIndex()); // 0</code></pre>
     
 
     
@@ -4067,11 +4014,7 @@ Debug.Log(childGO.transform.GetSiblingIndex()); // 0</code></pre>
         
 
     
-    <pre class="prettyprint"><code>var cube = GameObject.Find("Cube");
-cube.transform.Rotate(0, 45, 0);
-Debug.Log(cube.transform.InverseTransformDirection(new Vector3(1,0,0))); // (0.7, 0.0, 0.7)
-cube.transform.localScale *= 2;
-Debug.Log(cube.transform.InverseTransformDirection(new Vector3(1,0,0))); // (0.7, 0.0, 0.7)</code></pre>
+    <pre class="prettyprint"><code>var cube = GameObject.Find("Cube");cube.transform.Rotate(0, 45, 0);Debug.Log(cube.transform.InverseTransformDirection(new Vector3(1,0,0))); // (0.7, 0.0, 0.7)cube.transform.localScale *= 2;Debug.Log(cube.transform.InverseTransformDirection(new Vector3(1,0,0))); // (0.7, 0.0, 0.7)</code></pre>
     
 
     
@@ -4224,9 +4167,7 @@ Debug.Log(cube.transform.InverseTransformDirection(new Vector3(1,0,0))); // (0.7
         
 
     
-    <pre class="prettyprint"><code>var cube = GameObject.Find("Cube");
-cube.transform.Rotate(0, 45, 0);
-Debug.Log(cube.transform.InverseTransformPoint(new Vector3(2,0,0))); // (1.4, 0.0, 1.4)</code></pre>
+    <pre class="prettyprint"><code>var cube = GameObject.Find("Cube");cube.transform.Rotate(0, 45, 0);Debug.Log(cube.transform.InverseTransformPoint(new Vector3(2,0,0))); // (1.4, 0.0, 1.4)</code></pre>
     
 
     
@@ -4379,11 +4320,7 @@ Debug.Log(cube.transform.InverseTransformPoint(new Vector3(2,0,0))); // (1.4, 0.
         
 
     
-    <pre class="prettyprint"><code>var cube = GameObject.Find("Cube");
-cube.transform.Rotate(0, 45, 0);
-Debug.Log(cube.transform.InverseTransformVector(new Vector3(1,0,0))); // (0.7, 0.0, 0.7)
-cube.transform.localScale *= 2;
-Debug.Log(cube.transform.InverseTransformVector(new Vector3(1,0,0))); // (0.4, 0.0, 0.4)</code></pre>
+    <pre class="prettyprint"><code>var cube = GameObject.Find("Cube");cube.transform.Rotate(0, 45, 0);Debug.Log(cube.transform.InverseTransformVector(new Vector3(1,0,0))); // (0.7, 0.0, 0.7)cube.transform.localScale *= 2;Debug.Log(cube.transform.InverseTransformVector(new Vector3(1,0,0))); // (0.4, 0.0, 0.4)</code></pre>
     
 
     
@@ -4536,9 +4473,7 @@ Debug.Log(cube.transform.InverseTransformVector(new Vector3(1,0,0))); // (0.4, 0
         
 
     
-    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");
-var childGO = GameObject.Find("Sphere");
-Debug.Log(childGO.transform.IsChildOf(parentGO.transform)); // True</code></pre>
+    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");var childGO = GameObject.Find("Sphere");Debug.Log(childGO.transform.IsChildOf(parentGO.transform)); // True</code></pre>
     
 
     
@@ -4709,9 +4644,7 @@ Debug.Log(childGO.transform.IsChildOf(parentGO.transform)); // True</code></pre>
         
 
     
-    <pre class="prettyprint"><code>var cam = GameObject.Find("Main Camera");
-var sphere = GameObject.Find("Sphere");
-Debug.Log(cam.transform.LookAt(sphere.transform, Vector3.left)); // 相機側放，意即相機左方朝上</code></pre>
+    <pre class="prettyprint"><code>var cam = GameObject.Find("Main Camera");var sphere = GameObject.Find("Sphere");Debug.Log(cam.transform.LookAt(sphere.transform, Vector3.left)); // 相機側放，意即相機左方朝上</code></pre>
     
 
     
@@ -4946,8 +4879,7 @@ Debug.Log(cam.transform.LookAt(sphere.transform, Vector3.left)); // 相機側放
         
 
     
-    <pre class="prettyprint"><code>// Rotate 方法讓 x 增加 1 度
-cube.transform.Rotate(1,0,0);</code></pre>
+    <pre class="prettyprint"><code>// Rotate 方法讓 x 增加 1 度cube.transform.Rotate(1,0,0);</code></pre>
     
 
     
@@ -5117,13 +5049,7 @@ cube.transform.Rotate(1,0,0);</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// Cube 的 position 為 0,0,0; Sphere 的 position 為 1,0,0
-void Update()
-{
-    var A_GO = GameObject.Find("Cube"); // Find 方法建議用在 start 函示內，這裡是簡單演示
-    var B_GO = GameObject.Find("Sphere");
-    B_GO.transform.RotateAround(A_GO.transform.position, Vector3.up, 1); // 球繞方塊轉，每次 update 轉 1 度
-}</code></pre>
+    <pre class="prettyprint"><code>// Cube 的 position 為 0,0,0; Sphere 的 position 為 1,0,0void Update(){    var A_GO = GameObject.Find("Cube"); // Find 方法建議用在 start 函示內，這裡是簡單演示    var B_GO = GameObject.Find("Sphere");    B_GO.transform.RotateAround(A_GO.transform.position, Vector3.up, 1); // 球繞方塊轉，每次 update 轉 1 度}</code></pre>
     
 
     
@@ -5626,10 +5552,7 @@ SendMessageUpwards("Test"); // 父子 Test 函式都會呼叫</code></pre>
         
 
     
-    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");
-var childGO = GameObject.Find("Sphere");
-var childGO2 = GameObject.Find("Capsule");
-childGO2.transform.SetAsFirstSibling();</code></pre>
+    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");var childGO = GameObject.Find("Sphere");var childGO2 = GameObject.Find("Capsule");childGO2.transform.SetAsFirstSibling();</code></pre>
     
 
     
@@ -5708,10 +5631,7 @@ childGO2.transform.SetAsFirstSibling();</code></pre>
         
 
     
-    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");
-var childGO = GameObject.Find("Sphere");
-var childGO2 = GameObject.Find("Capsule");
-childGO.transform.SetAsLastSibling();</code></pre>
+    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");var childGO = GameObject.Find("Sphere");var childGO2 = GameObject.Find("Capsule");childGO.transform.SetAsLastSibling();</code></pre>
     
 
     
@@ -5858,11 +5778,7 @@ childGO.transform.SetAsLastSibling();</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// Cube 與 Sphere 在根節點，Capsule 為 Cube 子物件
-var parentGO = GameObject.Find("Cube");
-var parentGO2 = GameObject.Find("Sphere");
-var childGO = GameObject.Find("Capsule");
-childGO.transform.SetParent(parentGO2.transform, false);</code></pre>
+    <pre class="prettyprint"><code>// Cube 與 Sphere 在根節點，Capsule 為 Cube 子物件var parentGO = GameObject.Find("Cube");var parentGO2 = GameObject.Find("Sphere");var childGO = GameObject.Find("Capsule");childGO.transform.SetParent(parentGO2.transform, false);</code></pre>
     
 
     
@@ -6009,9 +5925,7 @@ childGO.transform.SetParent(parentGO2.transform, false);</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// x 方向移 5 單位並旋轉 y 軸 45 度
-var cube = GameObject.Find("Cube");
-cube.transform.SetPositionAndRotation(new Vector3(5, 0, 0), Quaternion.Euler(0, 45, 0));</code></pre>
+    <pre class="prettyprint"><code>// x 方向移 5 單位並旋轉 y 軸 45 度var cube = GameObject.Find("Cube");cube.transform.SetPositionAndRotation(new Vector3(5, 0, 0), Quaternion.Euler(0, 45, 0));</code></pre>
     
 
     
@@ -6135,10 +6049,7 @@ cube.transform.SetPositionAndRotation(new Vector3(5, 0, 0), Quaternion.Euler(0, 
         
 
     
-    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");
-var childGO = GameObject.Find("Sphere");
-var childGO2 = GameObject.Find("Capsule");
-childGO2.transform.SetSiblingIndex(0);</code></pre>
+    <pre class="prettyprint"><code>var parentGO = GameObject.Find("Cube");var childGO = GameObject.Find("Sphere");var childGO2 = GameObject.Find("Capsule");childGO2.transform.SetSiblingIndex(0);</code></pre>
     
 
     
@@ -6910,8 +6821,7 @@ childGO2.transform.SetSiblingIndex(0);</code></pre>
         
 
     
-    <pre class="prettyprint"><code>// Translate 方法讓 x 增加 1 單位
-cube.transform.Translate(1,0,0);</code></pre>
+    <pre class="prettyprint"><code>// Translate 方法讓 x 增加 1 單位cube.transform.Translate(1,0,0);</code></pre>
     
 
     
@@ -7113,7 +7023,7 @@ if (this.TryGetComponent(typeof(MonoBehaviour),out script)) Debug.Log(script);</
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sun Mar 01 2020 20:00:59 GMT+0800 (GMT+08:00)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Mar 02 2020 14:09:50 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>

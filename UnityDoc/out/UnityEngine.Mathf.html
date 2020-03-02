@@ -377,6 +377,16 @@
             </ul>
             <ul class="methods itemMembers">
             
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UnityEngine.MonoBehaviour#CancelInvoke"><a href="UnityEngine.MonoBehaviour.html#CancelInvoke">CancelInvoke</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#Invoke"><a href="UnityEngine.MonoBehaviour.html#Invoke">Invoke</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#InvokeRepeating"><a href="UnityEngine.MonoBehaviour.html#InvokeRepeating">InvokeRepeating</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#IsInvoking"><a href="UnityEngine.MonoBehaviour.html#IsInvoking">IsInvoking</a></li>
+            
             </ul>
             <ul class="events itemMembers">
             
@@ -773,19 +783,7 @@
         
 
     
-    <pre class="prettyprint"><code>Debug.Log(Mathf.Epsilon); // 1.401298E-45
-// 浮點數比較（解決誤差問題）
-bool isEqual(float a, float b)
-{
-    if (a >= b - Mathf.Epsilon && a <= b + Mathf.Epsilon)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}</code></pre>
+    <pre class="prettyprint"><code>Debug.Log(Mathf.Epsilon); // 1.401298E-45// 浮點數比較（解決誤差問題）bool isEqual(float a, float b){    if (a >= b - Mathf.Epsilon && a <= b + Mathf.Epsilon)    {        return true;    }    else    {        return false;    }}</code></pre>
     
 
     
@@ -838,18 +836,7 @@ bool isEqual(float a, float b)
         
 
     
-    <pre class="prettyprint"><code>Debug.Log(Mathf.Infinity); // Infinity
-// 射線探測
-void Update()
-{
-    // 畫出射線
-    Debug.DrawLine(Vector3.zero, Vector3.forward * 100);
-    // 讓射線無窮遠
-    if (Physics.Raycast(Vector3.zero, Vector3.forward, Mathf.Infinity))
-    {
-        print("物件前方有東西!");
-    }
-}</code></pre>
+    <pre class="prettyprint"><code>Debug.Log(Mathf.Infinity); // Infinity// 射線探測void Update(){    // 畫出射線    Debug.DrawLine(Vector3.zero, Vector3.forward * 100);    // 讓射線無窮遠    if (Physics.Raycast(Vector3.zero, Vector3.forward, Mathf.Infinity))    {        print("物件前方有東西!");    }}</code></pre>
     
 
     
@@ -1320,8 +1307,7 @@ void Update()
         
 
     
-    <pre class="prettyprint"><code>// 斜邊 2, 鄰邊 1, 求夾角幾度？
-Debug.Log(Mathf.Acos(1.0f / 2.0f) * Mathf.Rad2Deg); // 60</code></pre>
+    <pre class="prettyprint"><code>// 斜邊 2, 鄰邊 1, 求夾角幾度？Debug.Log(Mathf.Acos(1.0f / 2.0f) * Mathf.Rad2Deg); // 60</code></pre>
     
 
     
@@ -1786,16 +1772,7 @@ Debug.Log(Mathf.Acos(1.0f / 2.0f) * Mathf.Rad2Deg); // 60</code></pre>
     
     
     <div class="description">
-        知道座標求夾角，<br>
-atan2(a,b)是4象限反正切，它的取值不僅取決於正切值a/b，還取決於點 (b, a) 落入哪個象限：<br>
-當點(b, a) 落入第一象限时，atan2(a,b)的範圍是 0～pi/2;<br>
-當點(b, a) 落入第二象限时，atan2(a,b)的範圍是 pi/2～pi;<br>
-當點(b, a) 落入第三象限时，atan2(a,b)的範圍是 －pi～－pi/2;<br>
-當點(b, a) 落入第四象限时，atan2(a,b)的範圍是 -pi/2～0;<br>
-而 atan(a/b) 僅僅根據正切值为a/b求出對應的角度 （可以看作僅僅是2象限反正切）：<br>
-當 a/b > 0 时，atan(a/b)取值範圍是 0～pi/2;<br>
-當 a/b < 0 时，atan(a/b)取值範圍是 -pi/2～0;<br>
-與 atan 相異範例：a = 1, b = -1，則 atan(a/b) = atan(-1) = -pi/4(-45度), 而 atan2(a,b) = 3 * pi/4(135度)
+        知道座標求夾角，<br>atan2(a,b)是4象限反正切，它的取值不僅取決於正切值a/b，還取決於點 (b, a) 落入哪個象限：<br>當點(b, a) 落入第一象限时，atan2(a,b)的範圍是 0～pi/2;<br>當點(b, a) 落入第二象限时，atan2(a,b)的範圍是 pi/2～pi;<br>當點(b, a) 落入第三象限时，atan2(a,b)的範圍是 －pi～－pi/2;<br>當點(b, a) 落入第四象限时，atan2(a,b)的範圍是 -pi/2～0;<br>而 atan(a/b) 僅僅根據正切值为a/b求出對應的角度 （可以看作僅僅是2象限反正切）：<br>當 a/b > 0 时，atan(a/b)取值範圍是 0～pi/2;<br>當 a/b < 0 时，atan(a/b)取值範圍是 -pi/2～0;<br>與 atan 相異範例：a = 1, b = -1，則 atan(a/b) = atan(-1) = -pi/4(-45度), 而 atan2(a,b) = 3 * pi/4(135度)
     </div>
     
 
@@ -2730,11 +2707,7 @@ atan2(a,b)是4象限反正切，它的取值不僅取決於正切值a/b，還取
         
 
     
-    <pre class="prettyprint"><code>Debug.Log(Mathf.ClosestPowerOfTwo(2)); // 2
-Debug.Log(Mathf.ClosestPowerOfTwo(3)); // 4
-Debug.Log(Mathf.ClosestPowerOfTwo(4)); // 4
-Debug.Log(Mathf.ClosestPowerOfTwo(5)); // 4
-Debug.Log(Mathf.ClosestPowerOfTwo(6)); // 8</code></pre>
+    <pre class="prettyprint"><code>Debug.Log(Mathf.ClosestPowerOfTwo(2)); // 2Debug.Log(Mathf.ClosestPowerOfTwo(3)); // 4Debug.Log(Mathf.ClosestPowerOfTwo(4)); // 4Debug.Log(Mathf.ClosestPowerOfTwo(5)); // 4Debug.Log(Mathf.ClosestPowerOfTwo(6)); // 8</code></pre>
     
 
     
@@ -2762,9 +2735,7 @@ Debug.Log(Mathf.ClosestPowerOfTwo(6)); // 8</code></pre>
     
     
     <div class="description">
-        色溫轉 RGBA 顏色。
-色溫，以絕對溫度K來表示，即把標準黑體加熱，溫度升高到一定程度時該黑體顏色開始深紅-淺紅-橙黃-白-藍，逐漸改變，某光源與黑體的顏色相同時，我們把黑體當的絕對溫度稱為該光源的色溫。
-測量單位是Kelvin (°K)度。數值越低紅色越強，數值越高藍色越強。
+        色溫轉 RGBA 顏色。色溫，以絕對溫度K來表示，即把標準黑體加熱，溫度升高到一定程度時該黑體顏色開始深紅-淺紅-橙黃-白-藍，逐漸改變，某光源與黑體的顏色相同時，我們把黑體當的絕對溫度稱為該光源的色溫。測量單位是Kelvin (°K)度。數值越低紅色越強，數值越高藍色越強。
     </div>
     
 
@@ -3689,8 +3660,7 @@ Debug.Log(Mathf.ClosestPowerOfTwo(6)); // 8</code></pre>
     
     
     <div class="description">
-        Gamma 轉 Linear 空間亮度值
-<a target="_blank" href="https://zhuanlan.zhihu.com/p/66558476">Gamma、Linear、sRGB 和 Unity Color Space，你真懂了吗？</a>
+        Gamma 轉 Linear 空間亮度值<a target="_blank" href="https://zhuanlan.zhihu.com/p/66558476">Gamma、Linear、sRGB 和 Unity Color Space，你真懂了吗？</a>
     </div>
     
 
@@ -4006,11 +3976,7 @@ Debug.Log(Mathf.ClosestPowerOfTwo(6)); // 8</code></pre>
         
 
     
-    <pre class="prettyprint"><code>Debug.Log(Mathf.InverseLerp(0, 10, -1)); // 0，-1 小於 0 則回傳 0
-Debug.Log(Mathf.InverseLerp(0, 10, 0)); // 0
-Debug.Log(Mathf.InverseLerp(0, 10, 5)); // 0.5
-Debug.Log(Mathf.InverseLerp(0, 10, 10)); // 1
-Debug.Log(Mathf.InverseLerp(0, 10, 11)); // 1，-11 大於 10 則回傳 1</code></pre>
+    <pre class="prettyprint"><code>Debug.Log(Mathf.InverseLerp(0, 10, -1)); // 0，-1 小於 0 則回傳 0Debug.Log(Mathf.InverseLerp(0, 10, 0)); // 0Debug.Log(Mathf.InverseLerp(0, 10, 5)); // 0.5Debug.Log(Mathf.InverseLerp(0, 10, 10)); // 1Debug.Log(Mathf.InverseLerp(0, 10, 11)); // 1，-11 大於 10 則回傳 1</code></pre>
     
 
     
@@ -4764,8 +4730,7 @@ Debug.Log(Mathf.InverseLerp(0, 10, 11)); // 1，-11 大於 10 則回傳 1</code>
     
     
     <div class="description">
-        Linear 轉 Gamma 空間亮度值
-<a target="_blank" href="https://zhuanlan.zhihu.com/p/66558476">Gamma、Linear、sRGB 和 Unity Color Space，你真懂了吗？</a>
+        Linear 轉 Gamma 空間亮度值<a target="_blank" href="https://zhuanlan.zhihu.com/p/66558476">Gamma、Linear、sRGB 和 Unity Color Space，你真懂了吗？</a>
     </div>
     
 
@@ -5387,8 +5352,7 @@ Debug.Log(Mathf.InverseLerp(0, 10, 11)); // 1，-11 大於 10 則回傳 1</code>
         
 
     
-    <pre class="prettyprint"><code>print(Mathf.Max(1,2)); // 2
-print(Mathf.Max(1,2,3)); // 3</code></pre>
+    <pre class="prettyprint"><code>print(Mathf.Max(1,2)); // 2print(Mathf.Max(1,2,3)); // 3</code></pre>
     
 
     
@@ -5564,8 +5528,7 @@ print(Mathf.Max(1,2,3)); // 3</code></pre>
         
 
     
-    <pre class="prettyprint"><code>print(Mathf.Min(1,2)); // 1
-print(Mathf.Min(1,2,3)); // 1</code></pre>
+    <pre class="prettyprint"><code>print(Mathf.Min(1,2)); // 1print(Mathf.Min(1,2,3)); // 1</code></pre>
     
 
     
@@ -5764,12 +5727,7 @@ print(Mathf.Min(1,2,3)); // 1</code></pre>
         
 
     
-    <pre class="prettyprint"><code>float cur = 0;
-void Update()
-{
-    print(cur); // 0 1 2 3 4 5 6 7 8 9 10 10 10 10 ...
-    cur = Mathf.MoveTowards(cur, 10, 1);
-}</code></pre>
+    <pre class="prettyprint"><code>float cur = 0;void Update(){    print(cur); // 0 1 2 3 4 5 6 7 8 9 10 10 10 10 ...    cur = Mathf.MoveTowards(cur, 10, 1);}</code></pre>
     
 
     
@@ -5968,15 +5926,7 @@ void Update()
         
 
     
-    <pre class="prettyprint"><code>float cur = 0;
-float cur2 = 0;
-void Update()
-{
-    print(cur); // 0 -10 350 350 350 350 ...
-    cur = Mathf.MoveTowardsAngle(cur, 350, 10);
-    print(cur2); // 0 10 20 30 40 400 400 400 ...
-    cur2 = Mathf.MoveTowardsAngle(cur2, 400, 10);
-}</code></pre>
+    <pre class="prettyprint"><code>float cur = 0;float cur2 = 0;void Update(){    print(cur); // 0 -10 350 350 350 350 ...    cur = Mathf.MoveTowardsAngle(cur, 350, 10);    print(cur2); // 0 10 20 30 40 400 400 400 ...    cur2 = Mathf.MoveTowardsAngle(cur2, 400, 10);}</code></pre>
     
 
     
@@ -6129,9 +6079,7 @@ void Update()
         
 
     
-    <pre class="prettyprint"><code>Debug.Log(Mathf.NextPowerOfTwo(7)); // 8
-Debug.Log(Mathf.NextPowerOfTwo(139)); // 256
-Debug.Log(Mathf.NextPowerOfTwo(256)); // 256</code></pre>
+    <pre class="prettyprint"><code>Debug.Log(Mathf.NextPowerOfTwo(7)); // 8Debug.Log(Mathf.NextPowerOfTwo(139)); // 256Debug.Log(Mathf.NextPowerOfTwo(256)); // 256</code></pre>
     
 
     
@@ -6476,14 +6424,7 @@ Debug.Log(Mathf.NextPowerOfTwo(256)); // 256</code></pre>
         
 
     
-    <pre class="prettyprint"><code>Debug.Log(Mathf.PingPong(0, 3)); // 0
-Debug.Log(Mathf.PingPong(1, 3)); // 1
-Debug.Log(Mathf.PingPong(2, 3)); // 2
-Debug.Log(Mathf.PingPong(3, 3)); // 3
-Debug.Log(Mathf.PingPong(4, 3)); // 2
-Debug.Log(Mathf.PingPong(5, 3)); // 1
-Debug.Log(Mathf.PingPong(6, 3)); // 0
-Debug.Log(Mathf.PingPong(7, 3)); // 1</code></pre>
+    <pre class="prettyprint"><code>Debug.Log(Mathf.PingPong(0, 3)); // 0Debug.Log(Mathf.PingPong(1, 3)); // 1Debug.Log(Mathf.PingPong(2, 3)); // 2Debug.Log(Mathf.PingPong(3, 3)); // 3Debug.Log(Mathf.PingPong(4, 3)); // 2Debug.Log(Mathf.PingPong(5, 3)); // 1Debug.Log(Mathf.PingPong(6, 3)); // 0Debug.Log(Mathf.PingPong(7, 3)); // 1</code></pre>
     
 
     
@@ -6835,14 +6776,7 @@ Debug.Log(Mathf.PingPong(7, 3)); // 1</code></pre>
         
 
     
-    <pre class="prettyprint"><code>Debug.Log(Mathf.Repeat(0, 3)); // 0
-Debug.Log(Mathf.Repeat(1, 3)); // 1
-Debug.Log(Mathf.Repeat(2, 3)); // 2
-Debug.Log(Mathf.Repeat(3, 3)); // 0
-Debug.Log(Mathf.Repeat(4, 3)); // 1
-Debug.Log(Mathf.Repeat(5, 3)); // 2
-Debug.Log(Mathf.Repeat(6, 3)); // 0
-Debug.Log(Mathf.Repeat(7, 3)); // 1</code></pre>
+    <pre class="prettyprint"><code>Debug.Log(Mathf.Repeat(0, 3)); // 0Debug.Log(Mathf.Repeat(1, 3)); // 1Debug.Log(Mathf.Repeat(2, 3)); // 2Debug.Log(Mathf.Repeat(3, 3)); // 0Debug.Log(Mathf.Repeat(4, 3)); // 1Debug.Log(Mathf.Repeat(5, 3)); // 2Debug.Log(Mathf.Repeat(6, 3)); // 0Debug.Log(Mathf.Repeat(7, 3)); // 1</code></pre>
     
 
     
@@ -7762,14 +7696,7 @@ Debug.Log(Mathf.Repeat(7, 3)); // 1</code></pre>
         
 
     
-    <pre class="prettyprint"><code>float smoothTime = .3f;
-float velocity = 0.0f;
-void Update()
-{
-    var cube = GameObject.Find("Cube"); // 建議在 Start 函式使用以節省效能
-    float newPosition = Mathf.SmoothDamp(cube.transform.position.x, 10, ref velocity, smoothTime);
-    cube.transform.position = new Vector3(newPosition, cube.transform.position.y, cube.transform.position.z);
-}</code></pre>
+    <pre class="prettyprint"><code>float smoothTime = .3f;float velocity = 0.0f;void Update(){    var cube = GameObject.Find("Cube"); // 建議在 Start 函式使用以節省效能    float newPosition = Mathf.SmoothDamp(cube.transform.position.x, 10, ref velocity, smoothTime);    cube.transform.position = new Vector3(newPosition, cube.transform.position.y, cube.transform.position.z);}</code></pre>
     
 
     
@@ -8437,8 +8364,7 @@ void Update()
         
 
     
-    <pre class="prettyprint"><code>// 取距離
-Debug.Log(Mathf.Sqrt(A*A+B*B));</code></pre>
+    <pre class="prettyprint"><code>// 取距離Debug.Log(Mathf.Sqrt(A*A+B*B));</code></pre>
     
 
     
@@ -8606,7 +8532,7 @@ Debug.Log(Mathf.Sqrt(A*A+B*B));</code></pre>
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sun Mar 01 2020 20:00:59 GMT+0800 (GMT+08:00)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Mar 02 2020 14:09:50 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>
