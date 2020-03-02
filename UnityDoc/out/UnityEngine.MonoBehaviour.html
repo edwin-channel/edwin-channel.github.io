@@ -379,6 +379,8 @@
             
             <span class="subtitle">Methods</span>
             
+                <li data-name="UnityEngine.MonoBehaviour.print"><a href="UnityEngine.MonoBehaviour.html#.print">print</a></li>
+            
                 <li data-name="UnityEngine.MonoBehaviour#CancelInvoke"><a href="UnityEngine.MonoBehaviour.html#CancelInvoke">CancelInvoke</a></li>
             
                 <li data-name="UnityEngine.MonoBehaviour#Invoke"><a href="UnityEngine.MonoBehaviour.html#Invoke">Invoke</a></li>
@@ -386,6 +388,12 @@
                 <li data-name="UnityEngine.MonoBehaviour#InvokeRepeating"><a href="UnityEngine.MonoBehaviour.html#InvokeRepeating">InvokeRepeating</a></li>
             
                 <li data-name="UnityEngine.MonoBehaviour#IsInvoking"><a href="UnityEngine.MonoBehaviour.html#IsInvoking">IsInvoking</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#StartCoroutine"><a href="UnityEngine.MonoBehaviour.html#StartCoroutine">StartCoroutine</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#StopAllCoroutines"><a href="UnityEngine.MonoBehaviour.html#StopAllCoroutines">StopAllCoroutines</a></li>
+            
+                <li data-name="UnityEngine.MonoBehaviour#StopCoroutine"><a href="UnityEngine.MonoBehaviour.html#StopCoroutine">StopCoroutine</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -788,6 +796,122 @@
         <h3 class="subsection-title">Methods</h3>
         
         <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".print">
+            
+            <span class="type-signature static">static</span>UnityEngine.MonoBehaviour.print<span class="signature">(message)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="MonoBehaviour.js.html">MonoBehaviour.js</a>, <a href="MonoBehaviour.js.html#line205">line 205</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        將消息記錄到 Unity 控制台（與 Debug.Log 相同）。
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                消息</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
             
 <dt>
     <div class="nameContainer">
@@ -1336,6 +1460,393 @@
     
 </dd>
 
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="StartCoroutine">
+            
+            StartCoroutine<span class="signature">(methodName, <span class="optional">value</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Coroutine}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="MonoBehaviour.js.html">MonoBehaviour.js</a>, <a href="MonoBehaviour.js.html#line188">line 188</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        啟用協同程序<br>1.<a target="_blank" href="https://medium.com/feis-studio/%25E5%259C%25A8-unity-%25E8%25A9%25B2%25E7%2594%25A8-coroutine-%25E9%2582%2584%25E6%2598%25AF-update-654cce35737e">在 Unity 該用 Coroutine 還是 Update()?</a><br>2.<a target="_blank" href="https://medium.com/feis-studio/%25E6%25B7%25BA%25E8%25AB%2587-unity-coroutine-%25E7%259A%2584%25E9%2581%258B%25E8%25A1%258C%25E6%2596%25B9%25E5%25BC%258F-c3d5b52e1a0d">淺談 Unity Coroutine 的運行方式</a><br>3.<a target="_blank" href="https://medium.com/feis-studio/unity-coroutine-yieldinstruction-8e08fa8b3c9f">Coroutine 在等什麼？了解 Unity 的 YieldInstruction 和 Coroutine 類別</a>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>methodName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                啟用的函式名</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    null
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                任意參數</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Coroutine
+                        
+                    
+            </td>
+            <td class="description last">協同程序</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>using System.Collections;using UnityEngine;public class MainScript : MonoBehaviour{    IEnumerator Start()    {        StartCoroutine("DoSomething", 2.0F);        yield return new WaitForSeconds(1);        StopCoroutine("DoSomething");    }    IEnumerator DoSomething(float someParameter)    {        Debug.Log("someParameter:"+someParameter); // someParameter:2        while (true)        {            print("DoSomething Loop");            yield return null; // 回傳 null 會在每一影格執行一次        }    }}</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="StopAllCoroutines">
+            
+            StopAllCoroutines<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="MonoBehaviour.js.html">MonoBehaviour.js</a>, <a href="MonoBehaviour.js.html#line193">line 193</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        關閉所有協同程序 (以 StartCoroutine 開啟多個協同程序時)
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="StopCoroutine">
+            
+            StopCoroutine<span class="signature">(methodName)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="MonoBehaviour.js.html">MonoBehaviour.js</a>, <a href="MonoBehaviour.js.html#line199">line 199</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        關閉指定協同程序
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>methodName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                函式名</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
         </dl>
     
     
@@ -1353,7 +1864,7 @@
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Mar 02 2020 14:09:50 GMT+0800 (GMT+08:00)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Mar 02 2020 15:39:19 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>

@@ -154,6 +154,55 @@ UnityEngine.MonoBehaviour = class {
      */
     IsInvoking(methodName) {}
 
+    /**
+     * 啟用協同程序<br>
+     * 1.{@link https://medium.com/feis-studio/%E5%9C%A8-unity-%E8%A9%B2%E7%94%A8-coroutine-%E9%82%84%E6%98%AF-update-654cce35737e|在 Unity 該用 Coroutine 還是 Update()?}<br>
+     * 2.{@link https://medium.com/feis-studio/%E6%B7%BA%E8%AB%87-unity-coroutine-%E7%9A%84%E9%81%8B%E8%A1%8C%E6%96%B9%E5%BC%8F-c3d5b52e1a0d|淺談 Unity Coroutine 的運行方式}<br>
+     * 3.{@link https://medium.com/feis-studio/unity-coroutine-yieldinstruction-8e08fa8b3c9f|Coroutine 在等什麼？了解 Unity 的 YieldInstruction 和 Coroutine 類別}
+     * @param {string} methodName - 啟用的函式名
+     * @param {object} [value=null] - 任意參數
+     * @return {Coroutine} 協同程序
+     * @example
+     * using System.Collections;
+     * using UnityEngine;
+     * public class MainScript : MonoBehaviour
+     * {
+     *     IEnumerator Start()
+     *     {
+     *         StartCoroutine("DoSomething", 2.0F);
+     *         yield return new WaitForSeconds(1);
+     *         StopCoroutine("DoSomething");
+     *     }
+     * 
+     *     IEnumerator DoSomething(float someParameter)
+     *     {
+     *         Debug.Log("someParameter:"+someParameter); // someParameter:2
+     *         while (true)
+     *         {
+     *             print("DoSomething Loop");
+     *             yield return null; // 回傳 null 會在每一影格執行一次
+     *         }
+     *     }
+     * }
+     */
+    StartCoroutine(methodName, value) {}
 
+    /**
+     * 關閉所有協同程序 (以 StartCoroutine 開啟多個協同程序時)
+     */
+    StopAllCoroutines() {}
+
+    /**
+     * 關閉指定協同程序
+     * @param {string} methodName - 函式名
+     */
+    StopCoroutine(methodName) {}
+
+    /**
+     * 將消息記錄到 Unity 控制台（與 Debug.Log 相同）。
+     * @param {object} message - 消息
+     */
+    static print(message) {}
+    
     
 }
