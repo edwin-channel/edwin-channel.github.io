@@ -232,5 +232,377 @@ UnityEngine.MonoBehaviour = class {
      * }
      */
     $_LateUpdate() {}
+
+    /**
+     * XX
+     */
+    $_OnAnimatorIK() {}
+
+    /**
+     * XX
+     */
+    $_OnAnimatorMove() {}
+
+    /**
+     * 當玩家獲得或失去焦點時，發送給所有GameObject。OnApplicationFocus在應用程序丟失或獲得焦點時調用。使用Alt + Tab或Cmd + Tab可以將焦點從Unity應用程序轉移到另一個桌面應用程序。
+     * 這會導致該GameObject收到參數設置為false的OnApplicationFocus調用。當用戶切換回Unity應用程序時， GameObject會收到參數設置為true的OnApplicationFocus。
+     * OnApplicationFocus可以作為協同程序使用-在函數中使用yield語句即可。以這種方式實現時，將在初始幀期間對其計算兩次：第一次是早期通知，第二次在正常的協同程序更新步驟期間進行。
+     * 在Android上，當啟用屏幕鍵盤時，它會導致OnApplicationFocus ( false )事件。此外，如果在啟用鍵盤時按Home，則不會調用OnApplicationFocus ()事件，而改為調用OnApplicationPause ()。
+     * @example
+     * void OnApplicationFocus(bool hasFocus)
+     * {
+     *     print(hasFocus);
+     * } 
+     */
+    $_OnApplicationFocus() {}
+
+    /**
+     * 當應用程序暫停時，發送給所有GameObject。預設 Editor 下執行不會有 pauseStatus = True 的狀況發生, 若要看效果, 請在 Project Settings > Player > Resolution and Presentation 下將 Run in Background 取消勾選即可.
+     * 在Android上，當啟用屏幕鍵盤時，它會導致OnApplicationFocus ( false )事件。此外，如果在啟用鍵盤時按Home，則不會調用OnApplicationFocus ()事件，而改為調用OnApplicationPause ()。
+     * @example
+     * void OnApplicationPause(bool pauseStatus)
+     * {
+     *     print(pauseStatus);
+     * } 
+     */
+    $_OnApplicationPause() {}
+
+    /**
+     * 在應用程序退出前，發送給所有遊戲對象。在 Editor 中，當用戶停止播放模式時，將調用該函數。
+     * 注意：iOS 應用程序通常會被暫停而不退出。您應該在 iOS 構建的“Player Settings”中勾選“Exit on Suspend”，以使遊戲退出而不是暫停， 否則您可能收不到該調用。如果未勾選“Exit on Suspend”， 您會收到 OnApplicationPause 調用。
+     * @example
+     * void OnApplicationQuit()
+     * {
+     *     print("app quit!");
+     * } 
+     */
+    $_OnApplicationQuit() {}
+
+    /**
+     * XX
+     */
+    $_OnAudioFilterRead() {}
+
+    /**
+     * 該方法在物體從被渲染到不被渲染時調用，包括Game視圖和Scene視圖，只有在所有視圖中都不渲染時才會調用
+     */
+    $_OnBecameInvisible() {}
+
+    /**
+     * 方法在物體被渲染時調用，包括Game視圖和Scene視圖，物體Game視圖或者Scene視圖只要有一個進行渲染，方法就會被調用。
+     */
+    $_OnBecameVisible() {}
+
+    /**
+     * 當該碰撞體/剛體已開始接觸另一個剛體/碰撞體時，調用 OnCollisionEnter。至少一個是剛體
+     */
+    $_OnCollisionEnter() {}
+
+    /**
+     * 當該碰撞體/剛體已開始接觸另一個剛體/碰撞體時，調用 OnCollisionEnter2D（僅限2D 物理）。至少一個是剛體
+     */
+    $_OnCollisionEnter2D() {}
+
+    /**
+     * 當該碰撞體/剛體已停止接觸另一個剛體/碰撞體時，調用OnCollisionExit。至少一個是剛體
+     */
+    $_OnCollisionExit() {}
+
+    /**
+     * 當該碰撞體/剛體已停止接觸另一個剛體/碰撞體時，調用OnCollisionExit2D（僅限2D 物理）。至少一個是剛體
+     */
+    $_OnCollisionExit2D() {}
+
+    /**
+     * 對應正在接觸剛體/碰撞體的每一個碰撞體/剛體，每幀調用一次 OnCollisionStay。至少一個是剛體
+     */
+    $_OnCollisionStay() {}
+
+    /**
+     * 對應正在接觸剛體/碰撞體的每一個碰撞體/剛體，每幀調用一次 OnCollisionStay2D（僅限2D 物理）。至少一個是剛體
+     */
+    $_OnCollisionStay2D() {}
+
+    /**
+     * XX
+     */
+    $_OnConnectedToServer() {}
+
+    /**
+     * 傳統末日風格的第一人稱控制在現實中並不真實。該角色每小時能跑90英里，可以立即停止並急轉彎。因為該角色非常不真實，所以使用剛體和物理組件來創造這種行為有點不切實際，
+     * 並會讓玩家產生錯覺。解決方案是使用專門的角色控制器。角色控制器只是一個膠囊形狀的__碰撞體__，可以通過腳本來命令這個碰撞體向某個方向移動。然後，控制器將執行運動，
+     * 但會受到碰撞的約束。如果要通過角色控制器來推動剛體或對象，可以編寫腳本通過OnControllerColliderHit()函數對與控制器碰撞的任何對象施力。
+     * 用 Move 控制碰撞才會生效 controller.Move(mMoveDir);
+     * @example
+     * using System.Collections;
+     * using System.Collections.Generic;
+     * using UnityEngine;
+     * 
+     * public class FPSScript : MonoBehaviour
+     * {
+     *     public KeyCode mKeyLeft = KeyCode.LeftArrow;
+     *     public KeyCode mKeyRight = KeyCode.RightArrow;
+     *     public KeyCode mKeyForward = KeyCode.UpArrow;
+     *     public KeyCode mKeyBackward = KeyCode.DownArrow;
+     *     public float mKeyStrokeMoveStep = 0.07f;    //metre
+     *     private CharacterController controller;
+     *     private Vector3 mMoveDir;
+     * 
+     *     void Start()
+     *     {
+     *         controller = GetComponent<CharacterController>();
+     *     }
+     * 
+     *     void Update()
+     *     {
+     *         Vector3 vDir = Vector3.zero;
+     *         if (Input.GetKey(mKeyLeft))
+     *         {
+     *             vDir.x -= mKeyStrokeMoveStep;
+     *         }
+     *         if (Input.GetKey(mKeyRight))
+     *         {
+     *             vDir.x += mKeyStrokeMoveStep;
+     *         }
+     *         if (Input.GetKey(mKeyForward))
+     *         {
+     *             vDir.z += mKeyStrokeMoveStep;
+     *         }
+     *         if (Input.GetKey(mKeyBackward))
+     *         {
+     *             vDir.z -= mKeyStrokeMoveStep;
+     *         }
+     *         mMoveDir = transform.rotation * vDir;
+     *         controller.Move(mMoveDir); // 用 Move 控制碰撞才會生效
+     *     }
+     * 
+     *     private void OnControllerColliderHit(ControllerColliderHit hit)
+     *     {
+     *         Debug.Log(hit);
+     *     }
+     * }
+     */
+    $_OnControllerColliderHit() {}
+
+    /**
+     * 遊戲執行中刪除腳本時觸發
+     */
+    $_OnDestroy() {}
+
+    /**
+     * 腳本複選框取消勾選或是程式設置 enabled = false 時觸發
+     */
+    $_OnDisable() {}
+
+    /**
+     * XX
+     */
+    $_OnDisconnectedFromServer() {}
+
+    /**
+     * 有時候，我們會想要在場景中繪製一些符號、圖案或區塊，來標記一些特殊的區域。例如：重生點、死亡區或生怪區等。這些區塊我們只想要在編輯時看到，執行遊戲時是不能讓玩家看到的。
+     * 這種情形很適合利用 Gizmos 來繪製物件。不論有沒有選中這個物件，一定會被畫出來
+     * @example
+     * void OnDrawGizmos()
+     * {
+     *     // 在Scene面版看到黃色的球
+     *     Gizmos.color = Color.yellow;
+     *     Gizmos.DrawSphere(transform.position, 1);
+     * }
+     */
+    $_OnDrawGizmos() {}
+
+    /**
+     * 只有被選中這個物件，才會被畫出來，請參考 OnDrawGizmos
+     */
+    $_OnDrawGizmosSelected() {}
+
+    /**
+     * 腳本複選框勾選或是程式設置 enabled = true 時觸發
+     */
+    $_OnEnable() {}
+
+    /**
+     * XX
+     */
+    $_OnFailedToConnect() {}
+
+    /**
+     * XX
+     */
+    $_OnFailedToConnectToMasterServer() {}
     
+    /**
+     * 系統調用 OnGUI 來渲染和處理 GUI 事件。enabled 屬性設置為 false，則不會調用 OnGUI()
+     */
+    $_OnGUI() {}
+
+    /**
+     * XX
+     */
+    $_OnJointBreak() {}
+
+    /**
+     * XX
+     */
+    $_OnJointBreak2D() {}
+
+    /**
+     * XX
+     */
+    $_OnMasterServerEvent() {}
+
+    /**
+     * 當用戶在GUIElement或Collider上按下鼠標按鈕時，將調用OnMouseDown。
+     */
+    $_OnMouseDown() {}
+
+    /**
+     * 當用戶單擊GUIElement 或Collider 並仍然按住鼠標時，將調用OnMouseDrag。
+     */
+    $_OnMouseDrag() {}
+
+    /**
+     * 當鼠標進入GUIElement 或Collider 時調用。
+     */
+    $_OnMouseEnter() {}
+
+    /**
+     * 當鼠標不再處於GUIElement 或Collider 上方時調用。
+     */
+    $_OnMouseExit() {}
+
+    /**
+     * 當鼠標懸停在GUIElement 或Collider 上時，每幀調用一次。
+     */
+    $_OnMouseOver() {}
+
+    /**
+     * 當用戶鬆開鼠標按鈕時，將調用OnMouseUp。
+     */
+    $_OnMouseUp() {}
+
+    /**
+     * 鬆開鼠標時，僅當鼠標在按下時所在的GUIElement 或Collider 上時，才調用OnMouseUpAsButton。
+     */
+    $_OnMouseUpAsButton() {}
+
+    /**
+     * XX
+     */
+    $_OnNetworkInstantiate() {}
+
+     /**
+     * 建立一個 particle system 並加入下方腳本, 在 Particle System 面板 > Collision > Type 選 World, 在 Particle System 面板 > Collision > send Collision Message 打勾。
+     * 再建立一個方塊置於 particle system 上方即可測試
+     * @example
+     * private void OnParticleCollision(GameObject other)
+     * {
+     *     Debug.Log(other);
+     * }
+     */
+    $_OnParticleCollision() {}
+
+     /**
+     * 建立一個 particle system 並加入下方腳本, 在 Particle System 面板 > Trigger > Enter 選 Callback, Exit 選 Callback
+     * 再建立一個方塊置於 particle system 上方即可測試
+     * @example
+     * using System.Collections;
+     * using System.Collections.Generic;
+     * using UnityEngine;
+     * 
+     * public class ParticleScript : MonoBehaviour
+     * {
+     *     ParticleSystem ps;
+     * 
+     *     // 這些列表用於包含與每幀的觸發條件匹配的粒子。
+     *     List&lt;ParticleSystem.Particle&gt; enter = new List&lt;ParticleSystem.Particle&gt;();
+     *     List&lt;ParticleSystem.Particle&gt; exit = new List&lt;ParticleSystem.Particle&gt;();
+     * 
+     *     void Start()
+     *     {
+     *         ps = GetComponent&lt;ParticleSystem&gt;();
+     *     }
+     * 
+     *     private void OnParticleTrigger()
+     *     {
+     *         // 獲取與此幀的觸發條件匹配的粒子
+     *         int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
+     *         int numExit = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
+     * 
+     *         // iterate through the particles which entered the trigger and make them red
+     *         for (int i = 0; i < numEnter; i++)
+     *         {
+     *             ParticleSystem.Particle p = enter[i];
+     *             p.startColor = new Color32(255, 0, 0, 255);
+     *             enter[i] = p;
+     *         }
+     * 
+     *         // 迭代離開觸發器的粒子並使它們變綠
+     *         for (int i = 0; i < numExit; i++)
+     *         {
+     *             ParticleSystem.Particle p = exit[i];
+     *             p.startColor = new Color32(0, 255, 0, 255);
+     *             exit[i] = p;
+     *         }
+     * 
+     *         // 將修改後的粒子重新分配回粒子系統
+     *         ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
+     *         ps.SetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
+     *     }
+     * }
+     */
+    $_OnParticleTrigger() {}
+
+    /**
+     * XX
+     */
+    $_OnPlayerConnected() {}
+
+    /**
+     * XX
+     */
+    $_OnPlayerDisconnected() {}
+
+    /**
+     * 這個方法會在攝像機渲染完整個場景之後調用。所謂的渲染完場景，並不是指的已經顯示在屏幕上面，而是在場景裡面、攝像機可視範圍內的物體在正常的渲染流程應該看到的樣子計算完畢了。
+     */
+    $$_OnPostRender() {}
+
+    /**
+     * OnPreCull 在攝像機剔除場景前調用。這個方法會在攝像機進行計算那些物體在場景內之前調用。懂得3D渲染原理的朋友應該都知道，那些東西是攝像機能看到的範圍內的，
+     * 是靠攝像機的透視矩陣（透視、正交）來決定的，OnPreCull會在調用透視矩陣之前調用。在這個時候，你可以改變攝像機的透視矩陣，讓它的可視範圍發生變化。
+     */
+    $$_OnPreCull() {}
+
+    /**
+     * 這個方法會在OnPreCull之後，開始正式渲染場景之前調用。在這個方法調用時，你可以設置一些渲染相關的參數（除了透視矩陣），比如你可以設置一些天空盒顏色啊、霧的顏色啊，之類。
+     */
+    $$_OnPreRender() {}
+
+    /**
+     * 這個方法是在所有的渲染都已經完成了，準備輸出到屏幕的時候調用的。這個方法其實就是所謂的後期合成特效的核心了。之前在OnPostRender（或者OnRenderObject）執行完畢之後，
+     * 會生成了一張RenderTexture，這張RenderTexture正常來說就是我們將會在屏幕上面看到的畫面了。這時候在OnRenderImage方法調用時，我們還可以對這張RenderTexture進行一些
+     * 特殊的處理，比如用一些特定的shader對RenderTexture進行扭曲、改變亮度顏色等的操作。最後這個方法再會輸出一張RenderTexture，作為最終在屏幕顯示的畫面。
+     */
+    $$_OnRenderImage() {}
+
+    /**
+     * OnRenderObject和OnPostRender很類似，也是在攝像機渲染完整個場景之後調用。區別在與，上面的三個方法OnPreCull、OnPreRender和OnPostRender
+     * 都必須是掛在攝像機上面才能生效的，而OnRenderObject是不需要掛在攝像機上面就能生效的。
+     */
+    $$_OnRenderObject() {}
+
+    /**
+     * XX
+     */
+    $_OnSerializeNetworkView() {}
+
+    /**
+     * XX
+     */
+    $_OnServerInitialized() {}
+
+    
+
 }
