@@ -1,6 +1,6 @@
 /** 
  * 所有 unity 腳本的基類
- * extends UnityEngine.Behaviour
+ * @extends UnityEngine.Behaviour
  */
 UnityEngine.MonoBehaviour = class {
 
@@ -236,12 +236,12 @@ UnityEngine.MonoBehaviour = class {
     /**
      * XX
      */
-    $_OnAnimatorIK() {}
+    $$_OnAnimatorIK() {}
 
     /**
      * XX
      */
-    $_OnAnimatorMove() {}
+    $$_OnAnimatorMove() {}
 
     /**
      * 當玩家獲得或失去焦點時，發送給所有GameObject。OnApplicationFocus在應用程序丟失或獲得焦點時調用。使用Alt + Tab或Cmd + Tab可以將焦點從Unity應用程序轉移到另一個桌面應用程序。
@@ -281,7 +281,7 @@ UnityEngine.MonoBehaviour = class {
     /**
      * XX
      */
-    $_OnAudioFilterRead() {}
+    $$_OnAudioFilterRead() {}
 
     /**
      * 該方法在物體從被渲染到不被渲染時調用，包括Game視圖和Scene視圖，只有在所有視圖中都不渲染時才會調用
@@ -324,9 +324,9 @@ UnityEngine.MonoBehaviour = class {
     $_OnCollisionStay2D() {}
 
     /**
-     * XX
+     * 
      */
-    $_OnConnectedToServer() {}
+    //$_Obsolete_OnConnectedToServer() {}
 
     /**
      * 傳統末日風格的第一人稱控制在現實中並不真實。該角色每小時能跑90英里，可以立即停止並急轉彎。因為該角色非常不真實，所以使用剛體和物理組件來創造這種行為有點不切實際，
@@ -395,9 +395,9 @@ UnityEngine.MonoBehaviour = class {
     $_OnDisable() {}
 
     /**
-     * XX
+     * 
      */
-    $_OnDisconnectedFromServer() {}
+    //$_Obsolete_OnDisconnectedFromServer() {}
 
     /**
      * 有時候，我們會想要在場景中繪製一些符號、圖案或區塊，來標記一些特殊的區域。例如：重生點、死亡區或生怪區等。這些區塊我們只想要在編輯時看到，執行遊戲時是不能讓玩家看到的。
@@ -423,14 +423,14 @@ UnityEngine.MonoBehaviour = class {
     $_OnEnable() {}
 
     /**
-     * XX
+     * 
      */
-    $_OnFailedToConnect() {}
+    //$_Obsolete_OnFailedToConnect() {}
 
     /**
-     * XX
+     * 
      */
-    $_OnFailedToConnectToMasterServer() {}
+    //$_Obsolete_OnFailedToConnectToMasterServer() {}
     
     /**
      * 系統調用 OnGUI 來渲染和處理 GUI 事件。enabled 屬性設置為 false，則不會調用 OnGUI()
@@ -440,17 +440,17 @@ UnityEngine.MonoBehaviour = class {
     /**
      * XX
      */
-    $_OnJointBreak() {}
+    $$_OnJointBreak() {}
 
     /**
      * XX
      */
-    $_OnJointBreak2D() {}
+    $$_OnJointBreak2D() {}
 
     /**
-     * XX
+     * 
      */
-    $_OnMasterServerEvent() {}
+    //$_Obsolete_OnMasterServerEvent() {}
 
     /**
      * 當用戶在GUIElement或Collider上按下鼠標按鈕時，將調用OnMouseDown。
@@ -488,9 +488,9 @@ UnityEngine.MonoBehaviour = class {
     $_OnMouseUpAsButton() {}
 
     /**
-     * XX
+     * 
      */
-    $_OnNetworkInstantiate() {}
+    //$_Obsolete_OnNetworkInstantiate() {}
 
      /**
      * 建立一個 particle system 並加入下方腳本, 在 Particle System 面板 > Collision > Type 選 World, 在 Particle System 面板 > Collision > send Collision Message 打勾。
@@ -502,6 +502,11 @@ UnityEngine.MonoBehaviour = class {
      * }
      */
     $_OnParticleCollision() {}
+
+    /**
+     * XX
+     */
+    $$_OnParticleSystemStopped() {}
 
      /**
      * 建立一個 particle system 並加入下方腳本, 在 Particle System 面板 > Trigger > Enter 選 Callback, Exit 選 Callback
@@ -557,12 +562,17 @@ UnityEngine.MonoBehaviour = class {
     /**
      * XX
      */
-    $_OnPlayerConnected() {}
+    $$_OnParticleUpdateJobScheduled() {}
 
     /**
-     * XX
+     * 
      */
-    $_OnPlayerDisconnected() {}
+    //$_Obsolete_OnPlayerConnected() {}
+
+    /**
+     * 
+     */
+    //$_Obsolete_OnPlayerDisconnected() {}
 
     /**
      * 這個方法會在攝像機渲染完整個場景之後調用。所謂的渲染完場景，並不是指的已經顯示在屏幕上面，而是在場景裡面、攝像機可視範圍內的物體在正常的渲染流程應該看到的樣子計算完畢了。
@@ -594,15 +604,116 @@ UnityEngine.MonoBehaviour = class {
     $$_OnRenderObject() {}
 
     /**
-     * XX
+     * 
      */
-    $_OnSerializeNetworkView() {}
+    //$_Obsolete_OnSerializeNetworkView() {}
 
     /**
-     * XX
+     * 
      */
-    $_OnServerInitialized() {}
+    //$_Obsolete_OnServerInitialized() {}
 
-    
+    /**
+     * 當 GameObject 的變換的子項列表發生更改時，將調用該函數。
+     * @example
+     * void Start()
+     * {
+     *     var cube = GameObject.Find("CubeSprite");
+     *     var s = GameObject.Find("Sphere");
+     *     s.transform.SetAsFirstSibling(); // 列表更動觸發
+     * }
+     * 
+     * private void OnTransformChildrenChanged()
+     * {
+     *     Debug.Log("OnTransformChildrenChanged");
+     * }
+     */
+    $_OnTransformChildrenChanged() {}
+
+    /**
+     * 當GameObject 的變換的父屬性發生更改時，將調用該函數。
+     * @example
+     * void Start()
+     * {
+     *     var s = GameObject.Find("Sphere");
+     *     transform.parent = s.transform; // parent更動觸發
+     * }
+     * 
+     * private void OnTransformParentChanged()
+     * {
+     *     Debug.Log("OnTransformParentChanged");
+     * }
+     */
+    $_OnTransformParentChanged() {}
+
+    /**
+     * Tigger 沒有碰撞效果，可以做遊戲角色的警戒範圍。當Collider other 事件進入該觸發器時調用OnTriggerEnter。至少一個是剛體且至少一個 Collider 參數 Is Trigger 要勾選
+     */
+    $_OnTriggerEnter() {}
+
+    /**
+     * 當Collider other 事件進入該觸發器時調用OnTriggerEnter（僅限2D 物理）。至少一個是剛體且至少一個 Collider 參數 Is Trigger 要勾選
+     */
+    $_OnTriggerEnter2D() {}
+
+    /**
+     * 當Collider other 已停止接觸該觸發器時調用OnTriggerExit。至少一個是剛體且至少一個 Collider 參數 Is Trigger 要勾選
+     */
+    $_OnTriggerExit() {}
+
+    /**
+     * 當Collider other 已停止接觸該觸發器時調用OnTriggerExit（僅限2D 物理）。至少一個是剛體且至少一個 Collider 參數 Is Trigger 要勾選
+     */
+    $_OnTriggerExit2D() {}
+
+    /**
+     * 對於接觸觸發器的每一個Collider other，每次物理更新調用一次 OnTriggerStay。至少一個是剛體且至少一個 Collider 參數 Is Trigger 要勾選
+     */
+    $_OnTriggerStay() {}
+
+    /**
+     * 對於接觸觸發器的每一個Collider other，每次物理更新調用一次 OnTriggerStay（僅限2D 物理）。至少一個是剛體且至少一個 Collider 參數 Is Trigger 要勾選
+     */
+    $_OnTriggerStay2D() {}
+
+    /**
+     * 加載腳本後或Inspector 中的值發生更改時，將調用該函數（只能在Editor 中調用）。可以使用該函數驗證MonoBehaviour 的數據。這可用於確保在Editor 中修改數據時，數據保持在特定範圍內。<br>
+     * 網路文章:{@link https://www.jianshu.com/p/f564ba98ed7e|Unity3D 编辑器扩展 强大的OnValidate}
+     */
+    $_OnValidate() {}
+
+    /**
+     * 如果對象可見並且不是 UI 元素，則為每個攝像機調用 OnWillRenderObject。該函數在剔除處理期間（即將渲染每個剔除的對象時）調用。
+     */
+    $$_OnWillRenderObject() {}
+
+    /**
+     * 重置為默認值。當用戶點擊 Inspector 上下文菜單中的“Reset”按鈕或第一次添加組件時，將調用 Reset。該函數只能在 Editor 模式下調用。 Reset 最常用於在 Inspector 中提供良好的默認值。
+     * @example
+     * using UnityEngine;
+     * public class Example : MonoBehaviour
+     * {
+     *     public GameObject target;
+     * 
+     *     void Reset()
+     *     {
+     *         Debug.Log("Reset");
+     *         if (!target)
+     *             target = GameObject.FindWithTag("Player");
+     *     }
+     * }
+     */
+    $_Reset() {}
+
+    /**
+     * 在首次調用任何 Update 方法之前啟用腳本時，在幀上調用 Start。類似於 Awake 函數，Start 在腳本生命週期內僅調用一次。但是，不管是否啟用腳本，初始化腳本對象時都會調用 Awake。如果在初始化時未啟用腳本，則可以在與 Awake 不同的幀上調用 Start。
+     */
+    $_Start() {}
+
+    /**
+     * 如果啟用了MonoBehaviour，則每幀調用Update。
+     */
+    $_Update() {}
+
 
 }
